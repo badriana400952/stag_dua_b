@@ -1,0 +1,35 @@
+.bigParent{
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.parent{
+    display: flex;
+    padding: 30px;
+    margin: 10px;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+}
+
+.parent img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.chpernt{
+    display: flex;
+}
+.radiess{
+    border-radius: 50%;
+    
+}
+.shd{
+    box-shadow: 8px 4px 69px -37px rgba(82,89,89,0.75);
+-webkit-box-shadow: 8px 4px 69px -37px rgba(82,89,89,0.75);
+-moz-box-shadow: 8px 4px 69px -37px rgba(82,89,89,0.75);    
+}
+/* input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+    
+} */
