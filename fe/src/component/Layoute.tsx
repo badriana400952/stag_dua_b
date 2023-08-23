@@ -1,13 +1,21 @@
 // import React from 'react'
 import { Box, Heading, Button } from '@chakra-ui/react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { BsHouseDoor } from "@react-icons/all-files/bs/BsHouseDoor";
 import { BsSearch } from "@react-icons/all-files/bs/BsSearch";
 import { BsFillHeartFill } from "@react-icons/all-files/bs/BsFillHeartFill";
 import { BsFillPersonFill } from "@react-icons/all-files/bs/BsFillPersonFill";
+import { useDispatch } from 'react-redux';
+import { AUTH_LOGOUT } from '../store/rootReduc';
 
 
 const Layoute = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const Logoute = () => {
+        dispatch(AUTH_LOGOUT())
+        navigate("/")
+    }
     return (
         <>
             <Box width={"250px"} padding={'40px'} >
@@ -22,10 +30,8 @@ const Layoute = () => {
                 <Button background={"green.500"} color={'white'} borderRadius={'20px'} px={'40px'} marginTop={'10px'}> Create post</Button>
 
                 <Box position={'absolute'} bottom={'10px'}>
-                    <Link to={'/login'}>
-                        <Button background={"green.500"} position={"fixed"} bottom={'10px'} color={'white'} paddingX={'40px'} borderRadius={'20px'}>Log Oute</Button>
+                        <Button onClick={Logoute} background={"green.500"} position={"fixed"} bottom={'10px'} color={'white'} paddingX={'40px'} borderRadius={'20px'}>Log Oute</Button>
 
-                    </Link>
                 </Box>
 
             </Box>

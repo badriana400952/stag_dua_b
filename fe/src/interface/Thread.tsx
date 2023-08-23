@@ -57,7 +57,7 @@ export interface threadState {
     error: string | null;
 }
 export interface UserLoginState {
-    logins: User[];
+    auth: User[];
     loading: boolean;
     error: string | null
 }

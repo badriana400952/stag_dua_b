@@ -35,7 +35,7 @@ export const authSlice = createSlice({
 
             return user
         },
-        AUTH_CHECK: (_, action) => {
+        AUTH_CHECK: (state, action) => {
             const us = action.payload
             SetAuthToken(localStorage.token)
             const user: User = {
@@ -51,10 +51,11 @@ export const authSlice = createSlice({
         },
         AUTH_LOGOUT: () => {
             localStorage.removeItem("token")
+            return initialStateAuth
 
         },
         AUTH_ERROR: () => {
-                        localStorage.removeItem("token")
+            localStorage.removeItem("token")
             return initialStateAuth
 
         }

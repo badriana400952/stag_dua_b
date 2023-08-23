@@ -54,12 +54,12 @@ const View: React.FC = () => {
                 ) : (
                     datas?.map((data, i) =>
                         <Box key={i} className='shd' marginTop={'10px'}>
-                            <Box display={"flex"} p={'10px'} className='boxsh' padding={'20px'}>
-                                <Box width={"15%"} marginTop={'15px'} >
+                            <Box display={"flex"} justifyContent={'flex-start'} p={'10px'} className='boxsh' padding={'20px'}>
+                                <Box width={"10%"} marginTop={'15px'}  >
                                     {
 
                                         data.user ? (
-                                            <Avatar width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_foto} />
+                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_foto} />
 
 
                                         ) : (
@@ -67,7 +67,7 @@ const View: React.FC = () => {
 
                                         )}
                                 </Box>
-                                <Box marginLeft={"3"}>
+                                <Box marginLeft={"3"} width={"90%"}>
                                     <Box display={'flex'} >
                                         {data.user ? (
 
@@ -88,9 +88,12 @@ const View: React.FC = () => {
 
                                         )
                                     }
-                                    <Link to={`/detail/${data.id}`}>
-                                        <Box width={'90%'} marginTop={'15px'}><Text textAlign={"left"} display={'flex'} justifyContent={"left"}>{data.content}</Text></Box>
-                                    </Link>
+                                    <Box maxWidth={"500px"} >
+                                        <Link to={`/detail/${data.id}`}>
+                                            <Box width={'90%'} marginTop={'15px'}><Text textAlign={"left"} display={'flex'} justifyContent={"left"}>{data.content}</Text></Box>
+                                        </Link>
+                                    </Box>
+
 
                                     <Box display={'flex'}>
                                         <Box margin={'20px'} cursor={'pointer'}>
