@@ -25,7 +25,7 @@ class AuthorService {
             {
                 where : {
                     email: value.email,
-                    user_name : value.user_name,
+                    name : value.name,
                 }
             }
           )
@@ -35,8 +35,8 @@ class AuthorService {
           }
     
           const user = this.authRepository.create({
-            user_fullName: data.user_fullName,
-            user_name: data.user_name,
+            username: data.username,
+            name: data.name,
             email: data.email,
             password: passwordQ,
           });
@@ -62,9 +62,9 @@ class AuthorService {
             {
                 where : {
                     email: value.email,
-                    user_name : value.user_name
+                    name : value.name
                 },
-                select:["id", "user_fullName","user_name","email","password" ]
+                select:["id", "username","name","email","password" ]
             }
           )
     
@@ -81,8 +81,8 @@ class AuthorService {
           }
           const user = this.authRepository.create({
             id : checkEmail.id,
-            user_fullName: checkEmail.user_fullName,
-            user_name: checkEmail.user_name,
+            username: checkEmail.username,
+            name: checkEmail.name,
             email: checkEmail.email,
           });
           const token = jwt.sign({user} , "bagiansecret",{expiresIn : "1h"})
@@ -106,7 +106,7 @@ class AuthorService {
                 where : {
                     id: loginSession.user.id,
                 },
-                select:["id", "user_fullName","user_name","email","password" ]
+                select:["id", "username","name","email","password" ]
             }
           )
     

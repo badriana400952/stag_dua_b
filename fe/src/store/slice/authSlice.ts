@@ -6,11 +6,11 @@ import { SetAuthToken } from "../../lib/Api";
 
 const initialStateAuth: User = {
     id: 0,
-    user_fullName: "",
-    user_name: "",
+    username: "",
+    name: "",
     email: "",
-    profile_foto: "",
-    profile_desk: "",
+    profile_picture: "",
+    profile_deskripsi: "",
 }
 
 
@@ -26,11 +26,11 @@ export const authSlice = createSlice({
             localStorage.setItem("token", authpayload.token)
             const user: User = {
                 id: authpayload.user.id,
-                user_fullName: authpayload.user.user_fullName,
-                user_name: authpayload.user.user_name,
+                username: authpayload.user.username,
+                name: authpayload.user.name,
                 email: authpayload.user.email,
-                profile_foto: authpayload.user.profile_foto,
-                profile_desk: authpayload.user.profile_desk,
+                profile_picture: authpayload.user.profile_picture,
+                profile_deskripsi: authpayload.user.profile_deskripsi,
             }
 
             return user
@@ -40,11 +40,11 @@ export const authSlice = createSlice({
             SetAuthToken(localStorage.token)
             const user: User = {
                 id: us.id,
-                user_fullName: us.user_fullName,
-                user_name: us.user_name,
+                username: us.username,
+                name: us.name,
                 email: us.email,
-                profile_foto: us.profile_foto,
-                profile_desk: us.profile_desk,
+                profile_picture: us.profile_picture,
+                profile_deskripsi: us.profile_deskripsi,
             }
 
             return user

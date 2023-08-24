@@ -1,32 +1,24 @@
 import { Box, Text, Image, Button, Avatar, Center } from '@chakra-ui/react';
-
+import moment from 'moment'
 import './thread.css'
 
-import { BsFillChatSquareHeartFill, BsFillChatRightTextFill } from "react-icons/bs";
+import { BsFillChatRightTextFill } from "react-icons/bs";
 // import Komntar from '../Komntar';
 import { Link } from 'react-router-dom';
 import { HooksViewThread } from '../hoock/HooksViewThread';
 import { MoonLoader } from 'react-spinners';
-
+import { useState } from 'react';
+import { FaHeart,FaHeartBroken } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/types/rootState';
 
 const View: React.FC = () => {
+    const [like, setLike] = useState(0);
+    const [isLike, setIslike] = useState(false);
+    const { showImage, setShowImage, isLoading } = HooksViewThread()
+    const threadsRedux = useSelector ((state: RootState) => state.like.threads)
 
-    const { showImage, setShowImage, datas, isLoading, like, setLike, isLike, setIslike } = HooksViewThread()
-
-
-
-    // if (isLoading) {
-    //     return <ClockLoader
-    //         color="rgba(10, 195, 158, 1)"
-    //         cssOverride={{}}
-    //         size={73}
-    //         speedMultiplier={3}
-    //     />
-    // }
-
-
-
-
+    
     const handleClick = () => {
         if (isLike) {
             setLike(like - 1)
@@ -36,7 +28,6 @@ const View: React.FC = () => {
         }
         setIslike(!isLike)
     }
-
 
     return (
 
@@ -52,14 +43,14 @@ const View: React.FC = () => {
                         />
                     </Center>
                 ) : (
-                    datas?.map((data, i) =>
+                    threadsRedux && threadsRedux?.map((data, i) =>
                         <Box key={i} className='shd' marginTop={'10px'}>
                             <Box display={"flex"} justifyContent={'flex-start'} p={'10px'} className='boxsh' padding={'20px'}>
                                 <Box width={"10%"} marginTop={'15px'}  >
                                     {
 
                                         data.user ? (
-                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_foto} />
+                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} name={data.user.username} src={data.user.profile_picture} />
 
 
                                         ) : (
@@ -71,19 +62,19 @@ const View: React.FC = () => {
                                     <Box display={'flex'} >
                                         {data.user ? (
 
-                                            <Text p={'1'}>{data.user.user_fullName}</Text>
+                                            <Text p={'1'}>{data.user.username}</Text>
                                         ) : (
                                             <Text p={'1'}>Nama Pengguna Tidak Tersedia</Text>
                                         )}
                                         {data.user && (
-                                            <Text p={'1'} color={"gray.500"}>{data.user?.user_name}</Text>
+                                            <Text p={'1'} color={"gray.500"}>{data.user?.name}</Text>
                                         )}
-                                        <Text p={'1'} color={"gray.400"}> * {data.postd}</Text>
+                                        <Text p={'1'} color={"gray.400"}> * {moment(data.posted_at).startOf("minute").fromNow()}</Text>
                                     </Box>
                                     {
                                         showImage && (
                                             <Box width={"100%"} marginTop={'15px'} >
-                                                <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"500px"} height={"250px"} objectFit={"cover"} src={data.aut_img} />
+                                                <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"500px"} height={"250px"} objectFit={"cover"} src={data.image} />
                                             </Box>
 
                                         )
@@ -93,13 +84,16 @@ const View: React.FC = () => {
                                             <Box width={'90%'} marginTop={'15px'}><Text textAlign={"left"} display={'flex'} justifyContent={"left"}>{data.content}</Text></Box>
                                         </Link>
                                     </Box>
-
-
                                     <Box display={'flex'}>
                                         <Box margin={'20px'} cursor={'pointer'}>
-                                            <Button onClick={handleClick} color={isLike ? "red" : "gray"} fontSize={'20px'} background={'transparent'}>
-                                                <BsFillChatSquareHeartFill > {like} </BsFillChatSquareHeartFill>
-                                            </Button>
+
+
+
+                                                    <Button paddingX={'10px'} marginTop={"5px"}  onClick={handleClick} > {isLike ? <FaHeart /> : <FaHeartBroken />}<span style={{ marginLeft: '5px' }}> {like}</span> </Button>
+                                                
+                                                    
+
+
                                         </Box>
                                         <Box margin={'20px'} paddingTop={'5px'} display={'flex'} justifyContent={'center'}>
                                             <Button paddingX={'10'}>

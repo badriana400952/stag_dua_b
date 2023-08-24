@@ -25,15 +25,14 @@ class ThreadWorker {
                         const payload = JSON.parse(message.content.toString())
 
                         console.log("Received message", payload)
-                        console.log("hhh")
                         const cloudinaryResponse = await cloudinary.uploader.upload(
-                            "./uploads/" + payload.aut_img
+                            "./uploads/" + payload.image
                         );
                         console.log("hhhdd", cloudinaryResponse)
 
                         const thread = AppDataSource.getRepository(Threads).create({
                             content: payload.content,
-                            aut_img: cloudinaryResponse.secure_url,
+                            image: cloudinaryResponse.secure_url,
                              user: {
                                 id: payload.user_id
                              }
@@ -45,7 +44,7 @@ class ThreadWorker {
                         // this.emitter.emit("thread", createdThread)
 
                         console.log("ini createdThread", createdThread)
-                        console.log("ini createdThreadpdfgjiasipjdpfjospf")
+                        console.log("ini created")
 
                         channel.ack(message)
                     } catch (error) {

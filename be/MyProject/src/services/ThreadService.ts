@@ -45,8 +45,8 @@ class ThreadService {
             return threads.map((element) => ({
                 id: element.id,
                 content: element.content,
-                aut_img: element.aut_img,
-                postd: element.postd,
+                image: element.image,
+                posted_at: element.posted_at,
                 user: element.user,
                 replies_count: element.replies.length,
                 likes_count: element.likes.length,
@@ -97,8 +97,8 @@ class ThreadService {
     //         return {
     //             id: thread.id,
     //             content: thread.content,
-    //             aut_img: thread.aut_img,
-    //             postd: thread.postd,
+    //             image: thread.image,
+    //             post_at: thread.post_at,
     //             user: thread.user,
     //             replies: thread.replies,
     //             likes: thread.likes,
@@ -149,7 +149,7 @@ class ThreadService {
             const filename = res.locals.filename
             const data = {
                 content: req.body.content,
-                aut_img: filename,
+                image: filename,
 
             }
             // const data = req.body;
@@ -175,10 +175,10 @@ class ThreadService {
             if (error) {
                 return res.status(400).json({ error: error });
             }
-            console.log("INI ABGIAN AUTH IMAGE", data.aut_img)
+            console.log("INI ABGIAN AUTH IMAGE", data.image)
 
             const thread = this.threadRepository.create({
-                aut_img: clodResponse.secure_url,
+                image: clodResponse.secure_url,
                 content: data.content,
                 user: {
                     id: loginSession.user.id
@@ -224,7 +224,7 @@ class ThreadService {
 
 
             if (data.content != "") {
-                threadz.aut_img = data.aut_img
+                threadz.image = data.image
             }
             if (data.content != "") {
                 threadz.content = data.content

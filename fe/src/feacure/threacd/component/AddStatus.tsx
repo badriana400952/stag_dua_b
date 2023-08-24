@@ -23,14 +23,14 @@ const AddComent = () => {
               <Box display={'flex'} gap={'5px'}>
                 <Box width={"95%"} display={'flex'}>
                   <Box width={'100%'} marginTop={'20px'}>
-                    <Input type='text' width={"90%"} name="content" onChange={handleinpit}
+                    <Input type='text' placeholder="Add a story!" width={"90%"} name="content" onChange={handleinpit}
                       variant='flushed' placeSelf={'@'} />
                   </Box>
                   <Box width={'20%'} marginTop={"15px"} paddingBottom={'10px'} >
                     <label htmlFor="img">
                       <Button leftIcon={<BsCameraFill />} as={'span'} cursor={'pointer'} />
                     </label>
-                    <Input type='file' width={"50%"} id='img' name="aut_img"  onChange={hendleFile}
+                    <Input type='file' width={"50%"} id='img' name="image"  onChange={hendleFile}
                       variant='flushed' placeSelf={'@'} display={'none'} />
                   </Box>
                 </Box>

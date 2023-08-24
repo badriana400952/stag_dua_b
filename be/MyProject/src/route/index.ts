@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 // Rute terkait threads
 router.get("/thread", authenticate, ThreadsController.find) // Mendapatkan daftar threads setelah melewati proses autentikasi
 router.get("/thread/:id", authenticate, ThreadsController.findOne) // Mendapatkan thread berdasarkan ID setelah melewati proses autentikasi
-router.post("/thread/created", authenticate, upload("aut_img"), ThreadsQueue.create) // Membuat thread baru dengan mengunggah gambar (dengan antrean) setelah melewati proses autentikasi
+router.post("/thread/created", authenticate, upload("image"), ThreadsQueue.create) // Membuat thread baru dengan mengunggah gambar (dengan antrean) setelah melewati proses autentikasi
 router.delete("/thread/delete/:id", authenticate, ThreadsController.delete) // Menghapus thread berdasarkan ID setelah melewati proses autentikasi
 router.patch("/thread/update/:id", authenticate, ThreadsController.update) // Memperbarui informasi thread berdasarkan ID setelah melewati proses autentikasi
 
@@ -39,7 +39,7 @@ router.get("/check", authenticate, AuthorController.check) // Memeriksa detail p
 // Rute terkait pengguna
 router.get("/user", authenticate, UserController.find) // Mendapatkan daftar pengguna setelah melewati proses autentikasi
 router.get("/user/:id", authenticate, UserController.findOne) // Mendapatkan pengguna berdasarkan ID setelah melewati proses autentikasi
-router.post("/user/created", authenticate, upload("aut_img"), UserController.create) // Membuat pengguna baru dengan mengunggah gambar setelah melewati proses autentikasi
+router.post("/user/created", authenticate, upload("image"), UserController.create) // Membuat pengguna baru dengan mengunggah gambar setelah melewati proses autentikasi
 router.delete("/user/delete/:id", authenticate, UserController.delete) // Menghapus pengguna berdasarkan ID setelah melewati proses autentikasi
 router.patch("/user/update/:id", authenticate, UserController.update) // Memperbarui informasi pengguna berdasarkan ID setelah melewati proses autentikasi
 

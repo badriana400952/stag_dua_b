@@ -1,20 +1,20 @@
 
 export interface User {
     id: number,
-    user_fullName?: string,
-    user_name?: string,
+    username?: string,
+    name?: string,
     email?: string,
-    profile_foto?: string,
-    profile_desk: string
+    profile_picture?: string,
+    profile_deskripsi: string
 }
 // export interface UserStatus {
 
 //     content?: string,
-//     aut_img?:  Blob | MediaSource
+//     image?:  Blob | MediaSource
 // }
 export interface RegisUser {
-    user_name: string,
-    user_fullName: string,
+    name: string,
+    username: string,
     password: string,
     email: string,
 }
@@ -27,21 +27,20 @@ export interface LoginUser {
 
 
 export interface Thread {
-    id: number,
+    id?: number,
     user?: User,
-    aut_img?: string,
-    postd?: string,
+    image?: string,
+    posted_at?: Date,
     content?: string,
-    likes?: number,
-    replies?: number,
+    likes_count?: number,
     replies_count?: number,
-    is_like?: boolean,
+    is_liked?: boolean,
 }
 
 
 export interface ThreadStatus {
     content?: string,
-    aut_img?:string
+    image?:string
 }
 export interface ThreadComment {
     comment?: string,

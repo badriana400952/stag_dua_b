@@ -13,11 +13,11 @@ export class User {
 
     // Kolom yang menyimpan username pengguna (wajib)
     @Column()
-    user_name: string;
+    name:string;
     
     // Kolom yang menyimpan nama lengkap pengguna (wajib)
     @Column()
-    user_fullName: string;
+    username: string;
 
     // Kolom yang menyimpan alamat email pengguna (wajib)
     @Column()
@@ -29,11 +29,11 @@ export class User {
 
     // Kolom yang menyimpan URL foto profil pengguna (opsional, bisa null)
     @Column({ nullable: true })
-    profile_foto: string;
+    profile_picture: string;
 
     // Kolom yang menyimpan deskripsi profil pengguna (opsional, bisa null)
     @Column({ nullable: true })
-    profile_desk: string;
+    profile_deskripsi: string;
 
     // Relasi One-to-Many dengan entitas Threads, setiap user bisa memiliki banyak threads
     @OneToMany(() => Threads, (threads) => threads.user, {

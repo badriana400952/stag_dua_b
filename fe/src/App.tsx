@@ -14,19 +14,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { AUTH_CHECK, AUTH_ERROR } from "./store/rootReduc";
 import Profile from "./component/Profile";
 import { RootState } from "./store/types/rootState";
+
 // import LayouteRight from "./component/LayoutRight";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigate = useNavigate()
   const auth = useSelector((state: RootState) => state.auth)
-  console.log("ini loginsssssssssssssssssssssssssssssssssssss", auth)
+  // console.log("ini loginsssssssssssssssssssssssssssssssssssss", auth)
   const dispatch = useDispatch()
   const authCheck = async () => {
     try {
       SetAuthToken(localStorage.token)
       const response = await ApiData.get(`/check`)
-      console.log("berhasilllllllllll Login", response)
+      // console.log("berhasilllllllllll Login", response)
       dispatch(AUTH_CHECK(response.data.user))
 
       setIsLoading(false)
@@ -56,7 +57,7 @@ function App() {
   const IslsudahLogin = () => {
     SetAuthToken(localStorage.token)
 
-    if (!auth.user_fullName) {
+    if (!auth.username) {
       return <Navigate to="/login" />
     } else {
       return <Outlet />
@@ -66,7 +67,7 @@ function App() {
   function BelomLogin() {
     SetAuthToken(localStorage.token)
 
-    if (auth.user_fullName) {
+    if (auth.username) {
       return <Navigate to="/" />
     } else {
       return <Outlet />
@@ -77,7 +78,9 @@ function App() {
     <>
       {
         isLoading ? null :
-          <Routes>
+          <Routes >
+
+            
             <Route path="/" element={<IslsudahLogin />}>
               <Route path="/" element={<Dhasboard />} />
               <Route path="folowers" element={<Followers />} />
@@ -88,7 +91,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
             </Route>
-
+            
           </Routes>
       }
     </>

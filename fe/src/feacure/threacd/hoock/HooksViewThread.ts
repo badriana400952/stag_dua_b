@@ -3,10 +3,12 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { ApiData } from '../../../lib/Api';
 import { Thread } from '../../../interface/Thread';
+import { useDispatch } from 'react-redux';
+import { SET_THREAD_LIKE } from '../../../store/rootReduc';
 
 
 
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 // import { ChangeEvent } from 'react';
 
 
@@ -14,16 +16,15 @@ import { useNavigate } from "react-router-dom"
 
 interface ThreadStatus {
     content: string,
-    aut_img: File | null;
+    image: File | null;
 }
 export const HooksViewThread = () => {
 
     // GET LOGIC
     const [showImage, setShowImage] = useState<boolean>(true)
-    const [datas, setDatas] = useState<Thread[]>();
+    const [datas, setDatas] = useState<Thread[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [like, setLike] = useState(0);
-    const [isLike, setIslike] = useState(false);
+    const dispath = useDispatch()
     // 
     const dataStatus = async () => {
         try {
@@ -32,10 +33,10 @@ export const HooksViewThread = () => {
                     Authorization: `Bearer ${localStorage.token}`
                 }
             })
-
-            
             setDatas(response.data)
-            console.log('ini data', response.data)
+            dispath(SET_THREAD_LIKE({
+                threads: response.data
+            }))
             setIsLoading(false);
         } catch (error) {
             // setError(error);
@@ -43,22 +44,21 @@ export const HooksViewThread = () => {
         }
 
 
-    } 
+    }
     useEffect(() => {
         dataStatus()
 
     }, [])
-        console.log('ini datas datas datas datas', datas)
 
     // POST LOGIC
     const [thread, setThread] = useState<ThreadStatus>({
         content: "",
-        aut_img: null,
+        image: null,
 
     })
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-
+    console.log("idni", datas)
 
     const handleinpit = (e: React.ChangeEvent<HTMLInputElement>) => {
         setThread({
@@ -70,7 +70,7 @@ export const HooksViewThread = () => {
         if (file) {
             setThread((prevContent) => ({
                 ...prevContent,
-                aut_img: file
+                image: file
             }))
         }
     }
@@ -82,22 +82,43 @@ export const HooksViewThread = () => {
         try {
             const fromdata = new FormData()
             fromdata.append('content', thread.content)
-            fromdata.append('aut_img', thread.aut_img as File)
-
+            fromdata.append('image', thread.image as File)
             const response = await ApiData.post(`/thread/created`, fromdata);
-            console.log("Data yang p dikirim:", fromdata);
-
             console.log("kirim data logic Dhasboard ", response);
-           
-            navigate('/')
-            dataStatus();
-            // setThread({fromdata: ""})
+            // navigate('/')
+            if (response.data) {
+                setTimeout(async () => {
+                    await dataStatus();
+                }, 5000)
+            }
         } catch (error) {
             console.log(error);
         }
 
-    };
+    }
+    const [likes_count, setIikes_count] = useState(0);
+    const [is_liked, setIs_liked] = useState(false);
+    async function handleLikes(id: number, is_liked: boolean) {
+        try {
+            if (!is_liked) {
+                const response = await ApiData.post("/like", { thread_id: id })
+                console.log('ini data', response.data.likes_count)
+                setIs_liked(true)
+            } else {
+                const response = await ApiData.delete(`/like/${id}`)
+                console.log('ini data', response.data.likes_count)
+                setIs_liked(false)
+                setIikes_count(likes_count - 1);
+            }
+        } catch (error) {
+            console.log(error)
+
+        }
+        console.log('ini data is_likedis_likedis_liked', is_liked)
+        console.log('ini datalikes_countlikes_countlikes_countlikes_count', likes_count)
+
+    }
 
 
-    return { HandleKirim,thread, handleinpit, hendleFile, showImage, setShowImage, datas, isLoading, like, setLike, isLike, setIslike }
+    return { handleLikes, is_liked, HandleKirim, thread, handleinpit, hendleFile, showImage, setShowImage, datas, isLoading }
 }

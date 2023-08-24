@@ -1,7 +1,7 @@
 [
     {
         "id" : 1,
-        "aut_img": "https://th.bing.com/th/id/OIP.Qg7xp1LBfl-2SkQMJ-4SjgHaKl?pid=ImgDet&w=1280&h=1829&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.Qg7xp1LBfl-2SkQMJ-4SjgHaKl?pid=ImgDet&w=1280&h=1829&rs=1",
         "aut_FullName": "bads",
         "aut_username": "badss",
         "postd": "4h",
@@ -12,7 +12,7 @@
     },
     {
         "id" : 2,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",
@@ -23,7 +23,7 @@
     },
     {
         "id" : 3,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",
@@ -34,7 +34,7 @@
     },
     {
         "id" : 4,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",
@@ -45,7 +45,7 @@
     },
     {
         "id" : 5,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",
@@ -54,7 +54,7 @@
         "replace": 1
     },{
         "id" : 6,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",
@@ -64,7 +64,7 @@
     },
     {
         "id" : 7,
-        "aut_img": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
+        "image": "https://th.bing.com/th/id/OIP.1ZNUH420ULQyBJnyHEGthAHaLf?pid=ImgDet&rs=1",
         "aut_FullName": "Maliks",
         "aut_username": "Maliks",
         "postd": "4h",

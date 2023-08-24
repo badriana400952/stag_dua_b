@@ -13,7 +13,7 @@ export class Threads {
 
     // Kolom yang menyimpan gambar thread (opsional, bisa null)
     @Column({ nullable: true })
-    aut_img: string;
+    image: string;
 
     // Kolom yang menyimpan konten thread (wajib)
     @Column()
@@ -21,7 +21,7 @@ export class Threads {
 
     // Kolom yang menyimpan tanggal posting thread (diisi otomatis dengan waktu saat ini)
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-    postd: Date;
+    posted_at: Date;
 
     // Kolom yang menyimpan jumlah likes untuk thread (opsional, bisa null)
     @Column({ nullable: true })

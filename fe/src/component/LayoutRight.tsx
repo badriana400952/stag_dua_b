@@ -48,15 +48,15 @@ export default function LayouteRight() {
                             alt="#"
                         />
                         <Flex justify={'start'} mt={-12} ml={'10px'}>
-                            <Avatar width={'30%'} height={'30%'} src={'https:images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'} css={{ border: '4px solid white', }}
+                            <Avatar name={profile.username} width={'30%'} height={'30%'} src={'https:images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'} css={{ border: '4px solid white', }}
                             />
                         </Flex>
                         <Box display={'flex'} justifyContent={'space-between'} gap={'5px'} padding={'10px'}>
                             <Box >
                                 <Box display={'flex'} fontWeight={'bold'}>
-                                    ✨ <Text fontSize={'15px'}> {profile.user_fullName}   </Text>  ✨
+                                    ✨ <Text fontSize={'15px'}> {profile.username}   </Text>  ✨
                                 </Box>
-                                <Text fontSize={'11px'} color={'gray.500'}>@{profile.user_name}</Text>
+                                <Text fontSize={'11px'} color={'gray.500'}>@{profile.name}</Text>
                                 <Text fontSize={'13px'}>ini masih ngambil dari check saya belom membuat root user</Text>
                                 <Box display={'flex'} gap={'5px'}>
                                     <Text fontSize={'13px'}> 120</Text>

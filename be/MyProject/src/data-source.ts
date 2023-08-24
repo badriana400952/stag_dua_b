@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
     password: "123456789",
     database: "thread",
     synchronize: true,
-    logging: false,
+    logging: true,
     entities: ["src/entities/*.ts"],
     migrations: ["src/migrations/*.ts"],
     subscribers: [],

@@ -11,8 +11,8 @@ const Register = () => {
    
 
     const [dataUser, setDataUser] = useState<RegisUser>({
-        user_name : "",
-        user_fullName: "",
+        name : "",
+        username: "",
         email : "",
         password : ""
     })
@@ -42,19 +42,19 @@ const Register = () => {
                                 <FormControl >
                                     <Box >
                                         <Text marginBottom={'10px'} className="fon">Username </Text>
-                                        <Input  name='user_name' onChange={e => setDataUser({ ...dataUser, user_name: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="text" />
+                                        <Input  name='name' onChange={e => setDataUser({ ...dataUser, name: e.target.value })} placeholder='Name' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="text" />
                                     </Box>
                                     <Box >
                                         <Text marginBottom={'10px'} className="fon">Full Username </Text>
-                                        <Input name='user_fullName' onChange={e => setDataUser({ ...dataUser, user_fullName: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="text" />
+                                        <Input name='username' onChange={e => setDataUser({ ...dataUser, username: e.target.value })} placeholder='Username' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="text" />
                                     </Box>
                                     <Box marginTop={'20px'}>
                                         <Text marginBottom={'10px'} className="fon">Email address</Text>
-                                        <Input name='email' onChange={e => setDataUser({...dataUser,  email: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="email" />
+                                        <Input name='email' onChange={e => setDataUser({...dataUser,  email: e.target.value })} placeholder='Email' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="email" />
                                     </Box>
                                     <Box marginTop={'20px'}>
                                         <Text marginBottom={'10px'} className="fon">Password</Text>
-                                        <Input name='password' onChange={e => setDataUser({...dataUser,  password: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="password" />
+                                        <Input name='password' onChange={e => setDataUser({...dataUser,  password: e.target.value })} placeholder='Password' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="password" />
                                     </Box>
                                     <Button type="submit" color={'white'} marginY={'20px'} background={'green.600'} width={'100%'}>Register</Button >
                                 </FormControl>

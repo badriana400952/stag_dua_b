@@ -8,8 +8,8 @@ class ThreadsQueue{
             const nameQueue = "thread-queue";
             const filename = res.locals.filename
             const data = {
-                content: req.body.content,
-                aut_img: filename,
+                content: req.body.content? req.body.content : "",
+                image: filename,
             }
 
 
@@ -20,7 +20,7 @@ class ThreadsQueue{
             const loginSession = res.locals.loginSession
             const payload = {
                 content : data.content,
-                aut_img : data.aut_img,
+                image : data.image,
                 user_id : loginSession.user.id
             }
 
@@ -42,10 +42,10 @@ class ThreadsQueue{
             // if (error) {
             //     return res.status(400).json({ error: error });
             // }
-            // console.log("INI ABGIAN AUTH IMAGE", data.aut_img)
+            // console.log("INI ABGIAN AUTH IMAGE", data.image)
 
             // const thread = this.threadRepository.create({
-            //     aut_img: clodResponse.secure_url,
+            //     image: clodResponse.secure_url,
             //     content: data.content,
             //     user: {
             //         id: loginSession.user.id

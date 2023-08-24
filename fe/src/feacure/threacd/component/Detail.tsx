@@ -1,5 +1,7 @@
 import { Avatar, Box, Button, Center, Container, Image, Input, Text } from '@chakra-ui/react';
 
+import { BsFillChatRightTextFill } from "react-icons/bs";
+import { FaHeart,FaHeartBroken } from "react-icons/fa";
 
 import Layoute from '../../../component/Layoute';
 import LayouteRight from '../../../component/LayoutRight';
@@ -8,6 +10,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { HooksDetailThread } from '../hoock/HooksDetailThread';
 import { MoonLoader } from 'react-spinners';
+import moment from 'moment';
 
 
 const Detail = () => {
@@ -38,28 +41,35 @@ const Detail = () => {
 
                                 <Box boxShadow='2xl'>
                                     <Box display={"flex"} color={'black'} p={'10px'} mt={"5"} className='boxsh'>
-                                        <Box width={"15%"} marginTop={'15px'} >
-                                            <Avatar width={"70px"} padding={'10px'} height={"65px"} borderRadius={"50%"} objectFit={"cover"} src={detail.aut_img} />
+                                        <Box width={"100px"} marginTop={'15px'} >
+                                            <Avatar width={"60px"} padding={'10px'} height={"60px"} borderRadius={"50%"} objectFit={"cover"} src={detail.user?.profile_picture} />
                                         </Box>
-                                        <Box marginLeft={"3"}>
+                                        <Box marginLeft={"3"} marginTop={"20px"}>
                                             <Box display={'flex'} >
-                                                <Text p={'1'}>{detail.user?.user_fullName} {detail.id}</Text>
-                                                <Text p={'1'} color={"gray.400"}>@{detail.user?.user_name}</Text>
-                                                <Text p={'1'} color={"gray.400"}>.{detail.postd}</Text>
+                                                <Text p={'1'}>{detail.user?.username} |</Text>
+                                                <Text p={'1'} color={"gray.400"}>@{detail.user?.name}</Text>
+                                                <Text p={'1'} color={"gray.400"}>.{moment(detail.posted_at).startOf("minute").fromNow()}</Text>
                                             </Box>
                                             <Box width={"100%"} marginTop={'15px'} >
                                                 {
                                                     showImage && (
-                                                        <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"90%"} height={"300px"} objectFit={"cover"} src={detail.aut_img} alt='ss' />
+                                                        <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"90%"} height={"300px"} objectFit={"cover"} src={detail.image} alt='ss' />
                                                     )
                                                 }
                                             </Box>
                                             <Box width={'90%'} marginTop={'15px'}><Text textAlign={"left"} justifyContent={"left"}>{detail.content}</Text></Box>
                                             <Box display={'flex'}>
                                                 <Box margin={'20px'}>
-                                                    <Button p={'2px'} onClick={handleClick} colorScheme={isLike ? "red" : "gray"} >{like}</Button>
+                                                    <Button  paddingX={'10px'} onClick={handleClick} > {isLike ? <FaHeart /> : <FaHeartBroken />}<span style={{ marginLeft: '5px' }}> {like}</span> </Button>
                                                 </Box>
-                                                <Text margin={'20px'} paddingY={5} paddingX={20} borderRadius={5} background={'gray.200'}>{detail.replies}</Text>
+
+                                                <Box gap={'20px'} background={"gray.200"} borderRadius={"5px"} display={"flex"} marginTop={"20px"} height={"40px"} width={"150px"} justifyContent={"center"}> 
+                                                <Text  marginTop={'5px'}>
+                                                    
+                                                    {detail.replies_count} 
+                                                    </Text>
+                                                    <Text marginTop={"10px"}><BsFillChatRightTextFill /></Text>
+                                                    </Box>
                                             </Box>
                                             <Box>
                                                 <Box boxShadow='md' marginLeft={"-10px"} marginBottom={"20px"}>
@@ -78,10 +88,10 @@ const Detail = () => {
                                                             <Box key={i}>
                                                                 <Box display={'flex'} width={'100%'}  >
                                                                     <Box padding={'10px'}>
-                                                                        <Avatar width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_foto} />
+                                                                        <Avatar width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_picture} />
                                                                     </Box>
                                                                     <Box padding={'10px'}>
-                                                                        <Text p={'1'} >{data.user.user_name}</Text>
+                                                                        <Text p={'1'} >{data.user.name}</Text>
                                                                         <Text>{data.comment}</Text>
                                                                     </Box>
                                                                 </Box>

@@ -11,7 +11,7 @@ class QueueController {
             console.log("QueueController 2")
             // const data = {
             //     content: req.body.content,
-            //     aut_img: fileName
+            //     image: fileName
             // }
             // console.log("QueueController 3")
             // const {error } = createdThreadSchema.validate(data);
@@ -23,7 +23,7 @@ class QueueController {
             console.log("QueueController 5")
             const payload = {
                 content: req.body.content,
-                aut_img: fileName,
+                image: fileName,
                 userId : loginSession.user
                 // userId : loginSession.user.id
             };

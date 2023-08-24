@@ -30,16 +30,16 @@ const Login = () => {
                                 <FormControl >
                                     <Box marginTop={'20px'}>
                                         <Text marginBottom={'10px'} className="fon">Email address</Text>
-                                        <Input name='email' onChange={e => setDataUser({ ...dataUser, email: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="email" />
+                                        <Input  name='email' onChange={e => setDataUser({ ...dataUser, email: e.target.value })} placeholder='Email' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="email" />
                                     </Box>
                                     <Box marginTop={'20px'}>
                                         <Box display={'flex'} justifyContent={'space-between'}>
                                             <Text marginBottom={'10px'} className="fon">Password</Text>
                                             <Text marginBottom={'10px'} className="fon"><Link to={'#'} style={{ color: '#3182CE' }}>Forget Password</Link></Text>
                                         </Box>
-                                        <Input name='password' onChange={e => setDataUser({ ...dataUser, password: e.target.value })} placeholder='medium size' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="password" />
+                                        <Input name='password' onChange={e => setDataUser({ ...dataUser, password: e.target.value })} placeholder='Password' size='md' className="fon" width={'300px'} borderRadius={'10px'} type="password" />
                                     </Box>
-                                    <Button type="submit" color={'white'} marginY={'20px'} background={'green.600'} width={'100%'}>Register</Button >
+                                    <Button type="submit" color={'white'} marginY={'20px'} background={'green.600'} width={'100%'}>Login</Button >
                                 </FormControl>
                             </form>
                         </Center>
