@@ -11,11 +11,12 @@ AppDataSource.initialize().then(async () => {
 
     // const express = require('express')
     const app = express();
-    const port = 5000;
+    const port = 8000;
 
     app.use(express.json());
     app.use(cors())
 
+    
     // app.use(cors({
     //     "origin": '*', // Atur domain yang diizinkan
     //     "methods": 'GET,PUT,POST,DELETE', // Atur metode HTTP yang diizinkan

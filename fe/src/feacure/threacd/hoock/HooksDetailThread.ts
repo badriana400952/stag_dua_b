@@ -53,7 +53,7 @@ export const HooksDetailThread = () => {
         try {
             const responseDatas = await ApiData.get(`/replys/?thread_id=${id}`)
             setDataComentar(responseDatas.data)
-            console.log("setDataComentar", responseDatas.data)
+            // console.log("setDataComentar", responseDatas.data)
         } catch (error) {
             console.log(error)
         }
@@ -61,7 +61,7 @@ export const HooksDetailThread = () => {
     useEffect(() => {
         Comentar()
     }, [])
-    console.log("dataComentar dataComentar dataComentar", dataComentar)
+    // console.log("dataComentar dataComentar dataComentar", dataComentar)
 
     const [comment, setComment] = useState<ThreadComment>({
         comment: "",

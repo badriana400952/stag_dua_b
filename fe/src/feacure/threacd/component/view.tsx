@@ -1,37 +1,27 @@
 import { Box, Text, Image, Button, Avatar, Center } from '@chakra-ui/react';
 import moment from 'moment'
 import './thread.css'
-
+import { FaArrowsRotate, FaArrowUpFromBracket, FaEllipsis } from "react-icons/fa6";
 import { BsFillChatRightTextFill } from "react-icons/bs";
+import { FaHeart, FaHeartBroken, FaRegChartBar } from "react-icons/fa";
 // import Komntar from '../Komntar';
 import { Link } from 'react-router-dom';
 import { HooksViewThread } from '../hoock/HooksViewThread';
 import { MoonLoader } from 'react-spinners';
-import { useState } from 'react';
-import { FaHeart,FaHeartBroken } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/types/rootState';
 
 const View: React.FC = () => {
-    const [like, setLike] = useState(0);
-    const [isLike, setIslike] = useState(false);
-    const { showImage, setShowImage, isLoading } = HooksViewThread()
-    const threadsRedux = useSelector ((state: RootState) => state.like.threads)
 
+    const { showImage,handleLikes, setShowImage, isLoading } = HooksViewThread()
+    const threadsRedux = useSelector((state: RootState) => state.thread.threads)
     
-    const handleClick = () => {
-        if (isLike) {
-            setLike(like - 1)
-        } else {
-            setLike(like + 1)
+    console.log("threadsReduxthreadsReduxthreadsRedux", threadsRedux)
 
-        }
-        setIslike(!isLike)
-    }
 
     return (
 
-        <Box marginTop={'-5px'} >
+        <Box marginTop={'-5px'} width={'750px'} >
 
             {
                 isLoading ? (
@@ -44,13 +34,13 @@ const View: React.FC = () => {
                     </Center>
                 ) : (
                     threadsRedux && threadsRedux?.map((data, i) =>
-                        <Box key={i} className='shd' marginTop={'10px'}>
-                            <Box display={"flex"} justifyContent={'flex-start'} p={'10px'} className='boxsh' padding={'20px'}>
+                        <Box key={i} border={"1px"} borderColor={"gray.200"} className='hov'>
+                            <Box display={"flex"} justifyContent={'flex-start'} p={'10px'} className='boxsh' >
                                 <Box width={"10%"} marginTop={'15px'}  >
                                     {
 
                                         data.user ? (
-                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} name={data.user.username} src={data.user.profile_picture} />
+                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} name={data.user.username} src={data.user?.profile_picture} />
 
 
                                         ) : (
@@ -58,45 +48,48 @@ const View: React.FC = () => {
 
                                         )}
                                 </Box>
-                                <Box marginLeft={"3"} width={"90%"}>
-                                    <Box display={'flex'} >
-                                        {data.user ? (
+                                <Box marginLeft={"3"} width={"90%"} >
+                                    <Box display={'flex'} justifyContent={'space-between'}>
+                                        <Box display={'flex'}>
+                                            {data.user ? (
+                                                 <Link to={`/profile/${data.user.id}`} >
+                                                <Text p={'1'}>{data.user.username}</Text>
+                                             </Link>
 
-                                            <Text p={'1'}>{data.user.username}</Text>
-                                        ) : (
-                                            <Text p={'1'}>Nama Pengguna Tidak Tersedia</Text>
-                                        )}
-                                        {data.user && (
-                                            <Text p={'1'} color={"gray.500"}>{data.user?.name}</Text>
-                                        )}
-                                        <Text p={'1'} color={"gray.400"}> * {moment(data.posted_at).startOf("minute").fromNow()}</Text>
+                                            ) : (
+                                                <Text p={'1'}>Nama Pengguna Tidak Tersedia</Text>
+                                            )}
+                                            {data.user && (
+
+                                                <Text p={'1'} color={"gray.500"}>{data.user?.name}</Text>
+                                            )}
+                                            <Text p={'1'} color={"gray.400"}> * {moment(data.posted_at).startOf("minute").fromNow()}</Text>
+                                        </Box>
+                                        <Box>
+                                            <FaEllipsis />
+                                        </Box>
+
                                     </Box>
-                                    {
-                                        showImage && (
-                                            <Box width={"100%"} marginTop={'15px'} >
-                                                <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"500px"} height={"250px"} objectFit={"cover"} src={data.image} />
-                                            </Box>
-
-                                        )
-                                    }
-                                    <Box maxWidth={"500px"} >
+                                    <Box >
                                         <Link to={`/detail/${data.id}`}>
                                             <Box width={'90%'} marginTop={'15px'}><Text textAlign={"left"} display={'flex'} justifyContent={"left"}>{data.content}</Text></Box>
                                         </Link>
                                     </Box>
-                                    <Box display={'flex'}>
+                                    {
+                                        showImage && (
+                                            <Box width={"100%"} marginTop={'15px'} >
+                                                <Image borderRadius={'10px'} onError={() => setShowImage(true)} width={"600px"} height={"400px"} objectFit={"cover"} src={data.image} />
+                                            </Box>
+
+                                        )
+                                    }
+
+                                    <Box display={'flex'} justifyContent={'space-between'}>
                                         <Box margin={'20px'} cursor={'pointer'}>
-
-
-
-                                                    <Button paddingX={'10px'} marginTop={"5px"}  onClick={handleClick} > {isLike ? <FaHeart /> : <FaHeartBroken />}<span style={{ marginLeft: '5px' }}> {like}</span> </Button>
-                                                
-                                                    
-
-
+                                            <Button background={'transparent'} paddingX={'10px'} marginTop={"5px"}  color={data.is_liked ? "red" : "brand.grey"} onClick={() => handleLikes(data.id, data.is_liked)} >  {data.is_liked ? <FaHeart /> : <FaHeartBroken />} {data.likes_count} </Button>
                                         </Box>
                                         <Box margin={'20px'} paddingTop={'5px'} display={'flex'} justifyContent={'center'}>
-                                            <Button paddingX={'10'}>
+                                            <Button background={'transparent'} paddingX={'10'}>
                                                 <Text textAlign={"left"} marginTop={'-3px'} padding={'5px'} display={'flex'} justifyContent={"left"}> {data.replies_count}
                                                 </Text>
                                                 <Link to={`/detail/${data.id}`} >
@@ -105,6 +98,15 @@ const View: React.FC = () => {
                                                 </Link>
 
                                             </Button>
+                                        </Box>
+                                        <Box margin={'20px'} cursor={'pointer'}>
+                                            <Button background={'transparent'} paddingX={'10px'} marginTop={"5px"}  > <FaArrowsRotate /> </Button>
+                                        </Box>
+                                        <Box margin={'20px'} cursor={'pointer'}>
+                                            <Button background={'transparent'} paddingX={'10px'} marginTop={"5px"}  > <FaRegChartBar /></Button>
+                                        </Box>
+                                        <Box margin={'20px'} cursor={'pointer'}>
+                                            <Button background={'transparent'} paddingX={'10px'} marginTop={"5px"}  > <FaArrowUpFromBracket /></Button>
                                         </Box>
                                     </Box>
                                 </Box>

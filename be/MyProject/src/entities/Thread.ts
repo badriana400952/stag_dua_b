@@ -52,6 +52,8 @@ export class Threads {
         onUpdate: 'CASCADE'
     })
     likes: Likes[];
+
+
 }
 // Baris 4 - 16: Mendefinisikan entitas Threads dengan nama tabel "threads".
 //     Baris 18 - 21: Menggunakan @PrimaryGeneratedColumn untuk menandai kolom id sebagai primary key yang di - generate secara otomatis.

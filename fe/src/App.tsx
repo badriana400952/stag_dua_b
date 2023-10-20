@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AUTH_CHECK, AUTH_ERROR } from "./store/rootReduc";
 import Profile from "./component/Profile";
 import { RootState } from "./store/types/rootState";
+import EditProfile from "./component/EditProfile";
 
 // import LayouteRight from "./component/LayoutRight";
 
@@ -85,7 +86,10 @@ function App() {
               <Route path="/" element={<Dhasboard />} />
               <Route path="folowers" element={<Followers />} />
               <Route path='detail/:id' element={<Detail />} />
-              <Route path='profile' element={<Profile />} />
+              <Route path='profile/:id' element={<Profile />} />
+              <Route path='editprofil/:id' element={<EditProfile />} />
+              
+              {/* <Route path='detailUser/:id' element={<Profile />} /> */}
             </Route>
             <Route path='/' element={<BelomLogin />}>
               <Route path='/login' element={<Login />} />

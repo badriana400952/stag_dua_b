@@ -49,10 +49,25 @@ class ThreadsController {
 
     // CARA MENTOR LAMA
     // Method async untuk mencari satu thread berdasarkan id
+    // async findOne(req: Request, res: Response) {
+    //     // Memanggil method findOne dari ThreadService dengan meneruskan data permintaan dan respon
+    //     ThreadService.findOne(req, res);
+    // }
+
     async findOne(req: Request, res: Response) {
-        // Memanggil method findOne dari ThreadService dengan meneruskan data permintaan dan respon
-        ThreadService.findOne(req, res);
-    }
+        try {
+          const id = parseInt(req.params.id);
+          const loginSession = res.locals.loginSession;
+    
+          const response = await ThreadService.findOne(id, loginSession);
+          return res.status(200).json(response);
+        } catch (error) {
+          console.log("ini erorr baris 27", error);
+          return res
+            .status(500)
+            .json({ error: "Error while getting findOne threads controller" });
+        }
+      }
 
     // Method untuk membuat thread baru
     create(req: Request, res: Response) {

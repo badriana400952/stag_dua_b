@@ -10,6 +10,23 @@ class UserController {
         UserService.find(req, res);
     }
 
+    // async find(req: Request, res: Response) {
+    //     try {
+    //         // Mendapatkan informasi login session dari res.locals
+    //         const loginSession = res.locals.loginSession;
+
+    //         // Memanggil method find dari ThreadService dengan meneruskan data permintaan dan informasi session
+    //         const response = await UserService.find(req.body, loginSession);
+    //         // Mengembalikan respon sukses dengan status 200 dan data thread yang ditemukan
+    //         return res.status(200).json(response);
+    //     } catch (error) {
+    //         // Mengembalikan respon kesalahan server dengan status 500 jika terjadi error
+    //         return res
+    //             .status(500)
+    //             .json({ error: "Terjadi kesalahan pada server" });
+    //     }
+    // }
+
     // Method untuk mencari satu pengguna (user) berdasarkan ID
     findOne(req: Request, res: Response) {
         // Memanggil method findOne dari UserService dengan meneruskan data permintaan dan respon

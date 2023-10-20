@@ -64,7 +64,7 @@ class AuthorService {
                     email: value.email,
                     name : value.name
                 },
-                select:["id", "username","name","email","password" ]
+                select:["id", "username","name","email","password","profile_deskripsi", "profile_picture" ]
             }
           )
     
@@ -81,9 +81,22 @@ class AuthorService {
           }
           const user = this.authRepository.create({
             id : checkEmail.id,
-            username: checkEmail.username,
             name: checkEmail.name,
+            username: checkEmail.username,
             email: checkEmail.email,
+            profile_deskripsi: checkEmail.profile_deskripsi,
+            profile_picture: checkEmail.profile_picture,
+
+            // id: checkEmail.id,
+        // email: checkEmail.email,
+        // password: checkEmail.password,
+        // fullname: checkEmail.fullname,
+        // username: checkEmail.username,
+        // picture: checkEmail.picture,
+        // description: checkEmail.description,
+        // followers_count: checkEmail.followers.length,
+        // followings_count: checkEmail.followings.length,
+
           });
           const token = jwt.sign({user} , "bagiansecret",{expiresIn : "1h"})
           
@@ -97,27 +110,59 @@ class AuthorService {
       }
     
       async check(req: Request, res: Response) {
-        try {
+        // try {
     
-            const loginSession = res.locals.loginSession
+        //     const loginSession = res.locals.loginSession
     
-          const user = await this.authRepository.findOne(
-            {
-                where : {
-                    id: loginSession.user.id,
-                },
-                select:["id", "username","name","email","password" ]
-            }
-          )
+        //   const user = await this.authRepository.findOne(
+        //     {
+        //         where : {
+        //             id: loginSession.user.id,
+        //         },
+        //         select:["id", "username","name","email","password", "profile_deskripsi", "profile_picture" ]
+        //     }
+        //   )
     
           
-          return res.status(200).json({
-            user,
-            message : "Token is valid"
-          });
-        } catch (error) {
-          return res.status(500).json("Terjadi kesalahan pada server");
-        }
+        //   return res.status(200).json({
+        //     user,
+        //     message : "Token is valid"
+        //   });
+        // } catch (error) {
+        //   return res.status(500).json("Terjadi kesalahan pada server");
+        // }
+
+        const loginSession = res.locals.loginSession;
+        console.log("loginsession", loginSession);
+  
+        const user = await this.authRepository.findOne({
+          where: { id: loginSession.user.id },
+          select: [
+            "id",
+            "email",
+            "name",
+            "username",
+            "password",
+            "profile_deskripsi",
+            "profile_picture",
+          ],
+          relations: ["followers", "followings"],
+        });
+        return res.status(200).json({
+          message: "token is valid",
+          user: {
+            id : user.id,
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            profile_deskripsi: user.profile_deskripsi,
+            profile_picture: user.profile_picture,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        
+      
       }
       // async delete(req: Request, res: Response) {
       //   try {

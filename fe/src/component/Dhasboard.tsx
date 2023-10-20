@@ -6,19 +6,22 @@ import LayouteRight from './LayoutRight'
 const Dhasboard = () => {
 
     return (
-        <Container maxW='container.2xl' display={'flex'} justifyContent={'center'} >
-                    <Box display={'flex'} width={"1500px"} justifyContent={'space-between'}>
-                        <Box color={'black'} flex={'0,5'}  >
-                            <Layoute />
-                        </Box>
-                        <Box color={'black'} flex={'1'} >
-                            <Home />
-                        </Box>
-                        <Box flex={'0.5'}>
-                            <LayouteRight />
-                        </Box>
+        <Container maxW='container.2xl' display={'flex'}  justifyContent={'center'} >
+            <Box display={'flex'} width={"1500px"} justifyContent={'space-between'} position={"relative"}>
+                <Box color={'black'} flex={'0,5'}  position={"fixed"} >
+                    <Layoute />
+
+                </Box>
+                <Box position={"relative"} left={'300px'} display={'flex'} width={"80%"}>
+                    <Box color={'black'} flex={'1'} position={"relative"}>
+                        <Home />
                     </Box>
-            
+                    <Box flex={'0.5'}position={"relative"}>
+                        <LayouteRight />
+                    </Box>
+                </Box>
+            </Box>
+
 
         </Container>
     )

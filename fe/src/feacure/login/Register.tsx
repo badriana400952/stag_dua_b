@@ -22,7 +22,7 @@ const Register = () => {
         e.preventDefault()
         try {
             console.log("Data yang register:", dataUser);
-            await ApiData.post(`http://localhost:5000/api/register`, dataUser)
+            await ApiData.post(`/register`, dataUser)
         //    alert("Data berhasi ldi register")
             navigate('/login')
         } catch (error) {
@@ -67,7 +67,7 @@ const Register = () => {
             </Center>
             <Center marginTop={'10px'}>
                 <Container maxW='container.xl' >
-                    <Text className="fon" margin={'auto'} width={'350px'} justifyContent={'center'} align={'center'} borderRadius={'10px'} border={'2px'} borderColor={'gray.300'} background={'#F6F8FA'} padding={'10px'} fontSize={'14px'}>New to GitHub? <Link to={'#'} style={{ color: '#3182CE' }}> Create an account.</Link></Text>
+                    <Text className="fon" margin={'auto'} width={'350px'} justifyContent={'center'} align={'center'} borderRadius={'10px'} border={'2px'} borderColor={'gray.300'} background={'#F6F8FA'} padding={'10px'} fontSize={'14px'}>New to GitHub? <Link to={'/login'} style={{ color: '#3182CE' }}> Create an account.</Link></Text>
                 </Container>
             </Center>
         </>

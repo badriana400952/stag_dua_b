@@ -1,17 +1,13 @@
 
 export interface User {
-    id: number,
-    username?: string,
-    name?: string,
+    id?: number,
     email?: string,
-    profile_picture?: string,
-    profile_deskripsi: string
+    name: string,
+    username: string,
+    profile_deskripsi: string,
+    profile_picture: File | Blob | MediaSource | string;
 }
-// export interface UserStatus {
 
-//     content?: string,
-//     image?:  Blob | MediaSource
-// }
 export interface RegisUser {
     name: string,
     username: string,
@@ -27,21 +23,32 @@ export interface LoginUser {
 
 
 export interface Thread {
-    id?: number,
+    id: number,
     user?: User,
     image?: string,
     posted_at?: Date,
     content?: string,
-    likes_count?: number,
+    likes_count: number,
     replies_count?: number,
-    is_liked?: boolean,
+    is_liked: boolean,
 }
 
-
-export interface ThreadStatus {
+export interface ProfilThread {
+    id: number,
+    user?: User,
+    image?: string,
+    posted_at?: Date,
     content?: string,
-    image?:string
+    likes_count: number,
+    replies_count?: number,
+    is_liked: boolean,
 }
+export interface ThreadStatus {
+    content: string,
+    image: File | null;
+}
+
+
 export interface ThreadComment {
     comment?: string,
     thread_id?: number;
@@ -51,7 +58,7 @@ export interface ThreadComment {
 
 
 export interface threadState {
-    dataThread: Thread[];
+    thread: Thread[];
     loading: boolean;
     error: string | null;
 }
@@ -67,7 +74,16 @@ export interface threadStatepost {
     // error: string | null;
 }
 
-
+export interface IFollow{
+    id: number;
+    user_id: number;
+    username: string;
+    name: string;
+    email: string;
+    profile_picture?: string,
+    profile_deskripsi: string
+    is_followed: boolean;
+}
 
 
 

@@ -94,19 +94,18 @@ class ThreadService {
     //             relations: ["user", "replies", "likes"]
     //         });
 
-    //         return {
-    //             id: thread.id,
-    //             content: thread.content,
-    //             image: thread.image,
-    //             post_at: thread.post_at,
-    //             user: thread.user,
-    //             replies: thread.replies,
-    //             likes: thread.likes,
-    //             is_liked: thread.likes.some(
-    //                 (like:any) => like.userId === loginSession.user.id
+    //         return thread.map((element) => ({
+    //             id: element.id,
+    //             content: element.content,
+    //             image: element.image,
+    //             posted_at: element.posted_at,
+    //             user: element.user,
+    //             replies_count: element.replies.length,
+    //             likes_count: element.likes.length,
+    //             is_liked: element.likes.some(
+    //                 (like: any) => like.user.id === loginSession.user.id
     //             ),
-
-    //         }
+    //         }));
     //     } catch (error) {
     //         console.error(error); // Log the error for debugging purposes
     //         throw new Error("An error occurred thread service baru.");
@@ -114,31 +113,61 @@ class ThreadService {
     // }
     // cara mas surya tutup
 
-    async findOne(req: Request, res: Response) {
+
+    async findOne(id: number, loginSession?: any): Promise<any> {
         try {
-            console.log("masuk 1")
-            const id = parseInt(req.params.id)
-            console.log("masuk 2")
-
-            const threads = await this.threadRepository.findOne({
-                where: {
-                    id: id
-                },
-
-                relations: ["user", "replies", "likes "]
-            })
-            console.log("masuk 3")
-
-            console.log("ini id")
-            return res.status(200).json(threads);
-            console.log("masuk 4")
-
-        } catch (error) {
-            return res.status(500).json("errorr bre ");
-
+          const thread = await this.threadRepository.findOne({
+            where: {
+              id: id,
+            },
+            relations: ["user", "likes.user", "replies"],
+          });
+    
+          return {
+            id: thread.id,
+            content: thread.content,
+            image: thread.image,
+            posted_at: thread.posted_at,
+            user: thread.user,
+            replies_count: thread.replies.length,
+            likes_count: thread.likes.length,
+            is_liked: thread.likes.some(
+              (like: any) => like.user.id === loginSession.user.id
+            ),
+          };
+        } catch (err) {
+          throw new Error("error findOne threads");
         }
+      }
+    
+    
 
-    }
+
+    // async findOne(req: Request, res: Response) {
+    //     try {
+    //         console.log("masuk 1")
+    //         const id = parseInt(req.params.id)
+    //         console.log("masuk 22222", id)
+
+    //         const threads = await this.threadRepository.findOne({
+    //             where: {
+    //                 id: id
+    //             },
+    //             relations: ["user", "replies", "likes "]
+    //         })
+            
+    //         console.log('threads', threads)
+    //         console.log("masuk 3")
+
+    //         console.log("ini id")
+    //         return res.status(200).json(threads);
+
+    //     } catch (error) {
+    //         return res.status(500).json(error);
+
+    //     }
+
+    // }
 
     async create(req: Request, res: Response) {
         console.log("INI ABGIAN AWAL")

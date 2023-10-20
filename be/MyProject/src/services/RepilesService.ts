@@ -39,7 +39,7 @@ class RepilesService {
                 },
                 order: {
                     id: "DESC",
-                },
+                },  
             });
 
             console.log("111");

@@ -1,36 +1,27 @@
 // import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// // import { ApiData } from "../lib/Api";
-// import { Thread, threadState } from "../interface/Thread";
-// import { ApiData } from "../lib/Api";
+// import { Thread,  ThreadStatus,  threadState } from "../../interface/Thread";
+// import { ApiData } from "../../lib/Api";
 
-
-// // const getThreadServer = async (): Promise<ThreadStatus[]> => {
-// //     const response = await axios.get('http://localhost:5000/api/thread'); // Ubah URL sesuai dengan endpoint yang benar
-// //     return response.data;
-// //   };
-// //   export const fetchDataStatus = createAsyncThunk('thread/fetchDataStatus', async () => {
-// //     return await getThreadServer();
-// //   });
 
 // export const GetThreadServer = createAsyncThunk('thread/GetThreadServer', async (): Promise<Thread[]> => {
-//     const response = await ApiData.get('http://localhost:5000/api/thread',{
+//     const response = await ApiData.get('/thread',{
 //         headers : {
 //             Authorization: `Bearer ${localStorage.token}`
 //         }
-//     }); // Ubah URL sesuai dengan endpoint yang benar
-//     // console.log("ini ini ini", response.data)
+//     }); 
 //     return response.data;
 // });
 
-// export const AddThreadsDatas = createAsyncThunk(`thread/AddThreadsDatas`, async(thread) => {
-//     const responseData = await ApiData.post(`http://localhost:5000/api/thread/created`, thread);
-//     console.log("ini ini ini", responseData.data)
+// export const AddThreadsDatas = createAsyncThunk('thread/AddThreadsDatas', async (fromdata: ThreadStatus) => {
+//     const responseThread = await ApiData.post(`/thread/created`, fromdata);
+//     const data = responseThread.data;
 
-//     return responseData.data.thread
-// })
+//     return data;
+
+// });
 
 // const linitialState: threadState = {
-//     threadles: [],
+//     thread: [],
 //     loading: false,
 //     error: null,
 // };
@@ -47,7 +38,7 @@
 //             })
 //             .addCase(GetThreadServer.fulfilled, (state, action) => {
 //                 state.loading = false;
-//                 state.threadles = action.payload
+//                 state.thread = action.payload
 //             })
 //             .addCase(GetThreadServer.rejected, (state) => {
 //                 state.loading = false
@@ -60,7 +51,8 @@
 //             })
 //             .addCase(AddThreadsDatas.fulfilled, (state, action) => {
 //                 state.loading = false;
-//                 state.threadles.push(action.payload)
+//                 state.thread.push(action.payload)
+//                 // state.thread = action.payload
 //                 // console.log("ini threadles",threadSlice)
 //             })
 //             .addCase(AddThreadsDatas.rejected, (state) => {

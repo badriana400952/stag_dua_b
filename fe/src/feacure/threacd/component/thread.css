@@ -33,3 +33,8 @@
     visibility: hidden;
     
 } */
+
+
+.hov:hover{
+    background-color: rgba(236, 238, 238, 0.675);
+}

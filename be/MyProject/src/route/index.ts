@@ -12,6 +12,7 @@ import ThreadsQueue from '../queque/ThreadsQueue'
 import QueueController from '../queque/QueueController'
 import QueControllers from '../controllers/QueControllers'
 import LikeController from '../controllers/LikeController'
+import FollowController from '../controllers/FollowController'
 
 // Membuat instance router dari Express
 const router = express.Router()
@@ -37,12 +38,14 @@ router.get("/check", authenticate, AuthorController.check) // Memeriksa detail p
 
 
 // Rute terkait pengguna
+
 router.get("/user", authenticate, UserController.find) // Mendapatkan daftar pengguna setelah melewati proses autentikasi
+// router.get("/user/:id", authenticate, UserController.find);
 router.get("/user/:id", authenticate, UserController.findOne) // Mendapatkan pengguna berdasarkan ID setelah melewati proses autentikasi
 router.post("/user/created", authenticate, upload("image"), UserController.create) // Membuat pengguna baru dengan mengunggah gambar setelah melewati proses autentikasi
 router.delete("/user/delete/:id", authenticate, UserController.delete) // Menghapus pengguna berdasarkan ID setelah melewati proses autentikasi
-router.patch("/user/update/:id", authenticate, UserController.update) // Memperbarui informasi pengguna berdasarkan ID setelah melewati proses autentikasi
-
+router.patch("/user/update/:id", authenticate, upload("profile_picture"),UserController.update) // Memperbarui informasi pengguna berdasarkan ID setelah melewati proses autentikasi
+// router.patch("/user/update/:id", authenticate, upload("picture"), ProfileUserController.patch);
 // Rute terkait balasan (replies)
 router.get("/replys", authenticate, RepilesController.find) // Mendapatkan daftar balasan setelah melewati proses autentikasi
 router.post("/reply", authenticate, RepilesController.create) // Membuat balasan baru setelah melewati proses autentikasi
@@ -51,6 +54,12 @@ router.post("/reply", authenticate, RepilesController.create) // Membuat balasan
 router.post("/like", authenticate, LikeController.create) // Menambahkan like ke thread setelah melewati proses autentikasi
 router.delete("/like/:thread_id", authenticate, LikeController.delete) // Menghapus like dari thread setelah melewati proses autentikasi
 
+
+// FOLOW
+router.get("/followes", authenticate, FollowController.findRandom);
+router.get("/follow", authenticate, FollowController.find) // Mendapatkan daftar follow setelah melewati proses autentikasi
+router.post("/follow", authenticate, FollowController.create) // Membuat follow baru setelah melewati proses autentikasi
+router.delete("/follow/:followed_user_id", authenticate, FollowController.delete) // Menghapus follow dari pengguna setelah melewati proses autentikasi
 
 //      Kode di atas menggambarkan pengaturan rute untuk berbagai operasi dalam aplikasi.Setiap rute terkait dengan pengelolaan thread, otorisasi pengguna, pengguna, balasan, dan likes.Berikut penjelasan untuk setiap bagian:
 //      Rute untuk halaman awal memberikan respons "hello world" ketika rute ini diakses.

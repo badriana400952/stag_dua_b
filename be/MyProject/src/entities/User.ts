@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 import { Threads } from "./Thread";
 import { Likes } from "./Likes";
 import { Reply } from "./Reply";
+import { Follow } from "./Follow";
 
 // Definisi entitas User
 @Entity({ name: "user" })
@@ -13,8 +14,8 @@ export class User {
 
     // Kolom yang menyimpan username pengguna (wajib)
     @Column()
-    name:string;
-    
+    name: string;
+
     // Kolom yang menyimpan nama lengkap pengguna (wajib)
     @Column()
     username: string;
@@ -49,6 +50,18 @@ export class User {
     // Relasi One-to-Many dengan entitas Reply, setiap user bisa memiliki banyak balasan
     @OneToMany(() => Reply, (replies) => replies.user)
     replies: Reply[];
+
+    @OneToMany(() => Follow, (follow) => follow.followed, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
+    followers: Follow[];
+
+    @OneToMany(() => Follow, (follow) => follow.follower, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
+    followings: Follow[];
 }
 // Baris 4-15: Mendefinisikan entitas User dengan nama tabel "user".
 // Baris 17-21: Menggunakan @PrimaryGeneratedColumn untuk menandai kolom id sebagai primary key yang di-generate secara otomatis.

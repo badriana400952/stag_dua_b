@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { ApiData } from '../../../lib/Api';
 import { Thread } from '../../../interface/Thread';
 import { useDispatch } from 'react-redux';
-import { SET_THREAD_LIKE } from '../../../store/rootReduc';
+import { LIKE, SET_THREAD } from '../../../store/rootReduc';
+
 
 
 
@@ -34,9 +35,9 @@ export const HooksViewThread = () => {
                 }
             })
             setDatas(response.data)
-            dispath(SET_THREAD_LIKE({
+            dispath(SET_THREAD({
                 threads: response.data
-            }))
+            })) 
             setIsLoading(false);
         } catch (error) {
             // setError(error);
@@ -58,7 +59,7 @@ export const HooksViewThread = () => {
     })
     // const navigate = useNavigate()
 
-    console.log("idni", datas)
+    // console.log("idni", datas)
 
     const handleinpit = (e: React.ChangeEvent<HTMLInputElement>) => {
         setThread({
@@ -75,6 +76,7 @@ export const HooksViewThread = () => {
         }
     }
 
+    // const thredss = useSelector((state: RootState) => state.thread.threads)
 
     const HandleKirim = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,7 +86,7 @@ export const HooksViewThread = () => {
             fromdata.append('content', thread.content)
             fromdata.append('image', thread.image as File)
             const response = await ApiData.post(`/thread/created`, fromdata);
-            console.log("kirim data logic Dhasboard ", response);
+            // console.log("kirim data logic Dhasboard ", response);
             // navigate('/')
             if (response.data) {
                 setTimeout(async () => {
@@ -96,29 +98,33 @@ export const HooksViewThread = () => {
         }
 
     }
-    const [likes_count, setIikes_count] = useState(0);
-    const [is_liked, setIs_liked] = useState(false);
+    // const [likes_count, setIikes_count] = useState(0);
+    // const [is_liked, setIs_liked] = useState(false);
     async function handleLikes(id: number, is_liked: boolean) {
+        
         try {
             if (!is_liked) {
-                const response = await ApiData.post("/like", { thread_id: id })
-                console.log('ini data', response.data.likes_count)
-                setIs_liked(true)
+                 await ApiData.post("/like", { thread_id: id })
+                // console.log('ini data', response.data)
+                dispath(LIKE({ id: id, isLiked: is_liked }));
+                // setIs_liked(true)
             } else {
-                const response = await ApiData.delete(`/like/${id}`)
-                console.log('ini data', response.data.likes_count)
-                setIs_liked(false)
-                setIikes_count(likes_count - 1);
-            }
+                 await ApiData.delete(`/like/${id}`)
+                // console.log('ini data', response.data)
+                // setIs_liked(false)
+                // setIikes_count(likes_count - 1);
+
+            }  
+
+           dataStatus()
         } catch (error) {
             console.log(error)
 
         }
-        console.log('ini data is_likedis_likedis_liked', is_liked)
-        console.log('ini datalikes_countlikes_countlikes_countlikes_count', likes_count)
+        // console.log('ini datalikes_countlikes_countlikes_countlikes_count', likes_count)
 
     }
 
 
-    return { handleLikes, is_liked, HandleKirim, thread, handleinpit, hendleFile, showImage, setShowImage, datas, isLoading }
+    return { handleLikes, HandleKirim, thread, handleinpit, hendleFile, showImage, setShowImage, datas, isLoading }
 }

@@ -1,0 +1,110 @@
+[
+    {
+        "id": 6,
+        "content": "Changing the focus and error border colors# You can change the border color that shows when the input receives focus (focusBorderColor) and when isInvalid is set to true (errorBorderColor). The value can be set to a color in the theme object, like teal.400, or a raw CSS value.",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1693204669/dg2fd3cikqiab7ek7wr5.jpg",
+        "posted_at": "2023-08-28T06:37:49.534Z",
+        "user": {
+            "id": 21,
+            "name": "malik",
+            "username": "maliks",
+            "email": "malik@gmail.com",
+            "password": "$2b$10$YvO9KLv/7mCZ/m8uj47rsuwvm86VPjhEM7fogkOTtG.IV8Ox9AZ0C",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 0,
+        "likes_count": 0,
+        "is_liked": false
+    },
+    {
+        "id": 5,
+        "content": "Timnas U23 Indonesia sudah sampai di Jakarta, seusai berjuang di Piala AFF U23 2023.  Menurut pantauan Kompas.com, skuad timnas U23 Indonesia tiba di Hotel Sultan, Senayan, Jakarta, pada Minggu (27/8/2023) sekitar pukul 21.00 WIB.  Pelatih timnas U17 Indonesia, Bima Sakti, turut menyambut kehadiran skuad timnas U23 Indonesia di Hotel Sultan.",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1693152596/ufgqbeab6odlflwrqbav.jpg",
+        "posted_at": "2023-08-27T16:09:57.841Z",
+        "user": {
+            "id": 20,
+            "name": "badrian",
+            "username": "badriana",
+            "email": "badriana0402@gmail.com",
+            "password": "$2b$10$2l5/TA9WXO9GWrb0JSYifep7zT241fP3JtkUi58F8K7nBJKa99Mle",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 0,
+        "likes_count": 0,
+        "is_liked": false
+    },
+    {
+        "id": 4,
+        "content": "coba search",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1693058730/agcs5dype5zelrmyxhz3.jpg",
+        "posted_at": "2023-08-26T14:05:30.470Z",
+        "user": {
+            "id": 20,
+            "name": "badrian",
+            "username": "badriana",
+            "email": "badriana0402@gmail.com",
+            "password": "$2b$10$2l5/TA9WXO9GWrb0JSYifep7zT241fP3JtkUi58F8K7nBJKa99Mle",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 0,
+        "likes_count": 1,
+        "is_liked": false
+    },
+    {
+        "id": 3,
+        "content": "Erick Thohir sebelumnya jarang memberikan komentar terkait penampilan Timnas U-23 Indonesia di Piala AFF U-23 2023.  Tepatnya yakni ketika Garuda Muda tampil pada babak penyisihan grup.  Namun, pria yang juga menjabat sebagai Menteri BUMN itu akhirnya buka suara setelah tim asuhan Shin Tae-yong memastikan satu tempat di final Piala AFF U-23 2023.",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1693051084/serufecuejzmafhldyxy.jpg",
+        "posted_at": "2023-08-26T11:58:04.335Z",
+        "user": {
+            "id": 19,
+            "name": "izzah",
+            "username": "nur izzah",
+            "email": "izzah@gmail.com",
+            "password": "$2b$10$8ZHcpELPat8208rtwatYWuDU4JR47LKsY75Cs9tcD9wzKnL3VR3.i",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 3,
+        "likes_count": 1,
+        "is_liked": true
+    },
+    {
+        "id": 2,
+        "content": "Changing the focus and error border colors# You can change the border color that shows when the input receives focus (focusBorderColor) and when isInvalid is set to true (errorBorderColor). The value can be set to a color in the theme object, like teal.400, or a raw CSS value.",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1693036859/ijywsrtrpxtpshuobuuq.jpg",
+        "posted_at": "2023-08-26T08:00:59.189Z",
+        "user": {
+            "id": 19,
+            "name": "izzah",
+            "username": "nur izzah",
+            "email": "izzah@gmail.com",
+            "password": "$2b$10$8ZHcpELPat8208rtwatYWuDU4JR47LKsY75Cs9tcD9wzKnL3VR3.i",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 0,
+        "likes_count": 1,
+        "is_liked": true
+    },
+    {
+        "id": 1,
+        "content": "Changing the focus and error border colors# You can change the border color that shows when the input receives focus (focusBorderColor) and when isInvalid is set to true (errorBorderColor). The value can be set to a color in the theme object, like teal.400, or a raw CSS value.",
+        "image": "https://res.cloudinary.com/doykilt63/image/upload/v1692957055/okbfb7idqoprscb4ma7i.jpg",
+        "posted_at": "2023-08-25T09:50:55.392Z",
+        "user": {
+            "id": 18,
+            "name": "bayu",
+            "username": "bayuss",
+            "email": "bayu@gmail.com",
+            "password": "$2b$10$kEePinEBM2Sln/sYnBtn0Oz18JM3AWmCmmDL80coVJuloOhJAAeeS",
+            "profile_picture": null,
+            "profile_deskripsi": null
+        },
+        "replies_count": 0,
+        "likes_count": 2,
+        "is_liked": true
+    }
+]
