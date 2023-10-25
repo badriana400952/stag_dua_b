@@ -15,6 +15,7 @@ import { AUTH_CHECK, AUTH_ERROR } from "./store/rootReduc";
 import Profile from "./component/Profile";
 import { RootState } from "./store/types/rootState";
 import EditProfile from "./component/EditProfile";
+import Search from "./component/Search";
 
 // import LayouteRight from "./component/LayoutRight";
 
@@ -87,6 +88,7 @@ function App() {
               <Route path="folowers" element={<Followers />} />
               <Route path='detail/:id' element={<Detail />} />
               <Route path='profile/:id' element={<Profile />} />
+              <Route path='search' element={<Search />} />
               <Route path='editprofil/:id' element={<EditProfile />} />
               
               {/* <Route path='detailUser/:id' element={<Profile />} /> */}

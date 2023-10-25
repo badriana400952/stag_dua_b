@@ -16,7 +16,7 @@ const View: React.FC = () => {
     const { showImage,handleLikes, setShowImage, isLoading } = HooksViewThread()
     const threadsRedux = useSelector((state: RootState) => state.thread.threads)
     
-    console.log("threadsReduxthreadsReduxthreadsRedux", threadsRedux)
+    // console.log("threadsReduxthreadsReduxthreadsRedux", threadsRedux)
 
 
     return (
@@ -40,7 +40,7 @@ const View: React.FC = () => {
                                     {
 
                                         data.user ? (
-                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} name={data.user.username} src={data.user?.profile_picture} />
+                                            <Avatar marginLeft={'5px'} width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} name={data.user.username} src={`${data.user?.profile_picture}`} />
 
 
                                         ) : (

@@ -22,8 +22,8 @@ const Profile = () => {
     const threads = useSelector((state: RootState) => state.thread.threads)
     // const auth = useSelector((state: RootState) => state.auth);
     const { showImage, handleLikes, setShowImage, HandleKirim, handleinpit, hendleFile } = HooksViewThread()
-    console.log("thread", threads)
-    console.log("id", id)
+    // console.log("thread", threads)
+    // console.log("id", id)
     const [profiles, setProfiles] = useState<User>()
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +33,7 @@ const Profile = () => {
         }
         fetchData()
     },[])
-    console.log('data', profiles)
+    // console.log('data', profiles)
 
     return (
         <Container maxW='container.2xl' display={'flex'} justifyContent={'center'} >

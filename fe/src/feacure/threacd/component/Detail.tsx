@@ -25,7 +25,7 @@ const Detail = () => {
         isLike,
         like,
         setShowImage, } = HooksDetailThread()
-    console.log("detaildetaildetail", detail)
+    // console.log("detaildetaildetail", detail)
     return (
 
         <>
@@ -43,7 +43,7 @@ const Detail = () => {
                                     <Box border={"1px"} borderColor={"gray.200"}>
                                         <Box display={"flex"} color={'black'} p={'10px'} mt={"5"} className='boxsh'>
                                             <Box width={"100px"} marginTop={'15px'} >
-                                                <Avatar width={"60px"} padding={'10px'} height={"60px"} borderRadius={"50%"} objectFit={"cover"} src={detail.user?.profile_picture} name={detail.user?.username} />
+                                                <Avatar width={"60px"} padding={'10px'} height={"60px"} borderRadius={"50%"} objectFit={"cover"}src={`${data.user.profile_picture}`} name={detail.user?.username} />
                                             </Box>
                                             <Box marginLeft={"3"} marginTop={"20px"}>
                                                 <Box display={'flex'} >
@@ -84,7 +84,7 @@ const Detail = () => {
                                             </Box>
                                             )} */}
                                             <Box width={"65px"} margin={'15px'} >
-                                                <Avatar width={"60px"} padding={'10px'} height={"60px"} borderRadius={"50%"} objectFit={"cover"} src={detail.user?.profile_picture} name={detail.user?.username} />
+                                                <Avatar width={"60px"} padding={'10px'} height={"60px"} borderRadius={"50%"} objectFit={"cover"} src={`${detail.user?.profile_picture}`} name={detail.user?.username} />
                                             </Box>
                                             <Box>
                                                 <form onSubmit={handleKirim}>
@@ -109,7 +109,7 @@ const Detail = () => {
                                                     <Box key={i}>
                                                         <Box display={'flex'}  >
                                                             <Box padding={'10px'}>
-                                                                <Avatar width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={data.user.profile_picture} name={data.user?.username} />
+                                                                <Avatar width={"50px"} height={"50px"} borderRadius={"50%"} objectFit={"cover"} src={`${data.user.profile_picture}`} name={data.user?.username} />
                                                             </Box>
                                                             <Box width={`650px`}>
                                                                 <Box padding={'10px'}>

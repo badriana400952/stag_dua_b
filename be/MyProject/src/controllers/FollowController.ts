@@ -31,6 +31,16 @@ class FollowController {
     //       return res.status(500).json({ error: error.message });
     //     }
     //   }
+    // async findRandom(req: Request, res: Response) {
+    //     try {
+    //         const loginSession = res.locals.loginSession;
+    //         const response = await FollowsService.findRandom(req.body, loginSession);
+    //         return res.status(200).json(response);
+    //     } catch (error) {
+    //         console.error("Error in findRandom controller:", error);
+    //         return res.status(500).json({ error: "Internal Server Error" });
+    //     }
+    // }
     async findRandom(req: Request, res: Response) {
         try {
             const response = await FollowsService.findRandom(req.query)
@@ -40,7 +50,6 @@ class FollowController {
             return res.status(500).json({error: error.message})
         }
     }
-
     async create(req: Request, res: Response) {
         try {
             const loginSession = res.locals.loginSession;

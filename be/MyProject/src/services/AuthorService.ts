@@ -64,7 +64,7 @@ class AuthorService {
                     email: value.email,
                     name : value.name
                 },
-                select:["id", "username","name","email","password","profile_deskripsi", "profile_picture" ]
+                select:["id", "username","name","email","password","profile_deskripsi", "profile_picture", "followers", "followings"], 
             }
           )
     
@@ -86,6 +86,10 @@ class AuthorService {
             email: checkEmail.email,
             profile_deskripsi: checkEmail.profile_deskripsi,
             profile_picture: checkEmail.profile_picture,
+            followers: checkEmail.followers,
+            followings: checkEmail.followings,
+
+            
 
             // id: checkEmail.id,
         // email: checkEmail.email,
@@ -145,6 +149,8 @@ class AuthorService {
             "password",
             "profile_deskripsi",
             "profile_picture",
+            // "followers",
+            // "followings",
           ],
           relations: ["followers", "followings"],
         });
@@ -157,6 +163,9 @@ class AuthorService {
             email: user.email,
             profile_deskripsi: user.profile_deskripsi,
             profile_picture: user.profile_picture,
+            // followers: user.followers,
+            // followings: user.followings,
+            
           },
         });
       } catch (error) {

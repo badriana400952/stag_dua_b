@@ -2,31 +2,34 @@ import { Avatar, Box, Button, Container, Heading, Text } from '@chakra-ui/react'
 import Layoute from './Layoute'
 import LayouteRight from './LayoutRight'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import { ApiData } from '../lib/Api'
+import { ApiData, SetAuthToken } from '../lib/Api'
 import { useDispatch, useSelector } from 'react-redux'
 import { GET_FOLLOW, SETFOLLOW_STATE, SET_FOLLOWERS } from '../store/rootReduc'
 import { RootState } from '../store/types/rootState'
 import { useCallback, useEffect, useState } from 'react'
-import { User } from '../interface/Thread'
+import { IFollow } from '../interface/Thread'
+import FollowersTab from './FollowersComponent/FollowersTab'
 const Followers = () => {
     const dispatch = useDispatch()
-    const [user, setUser] = useState<User[]>([])
-    const handleUser = async () => {
-        try {
-            const response = await ApiData.get(`/user`)
-            // console.log(response.data)
-            setUser(response.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(() => {
-        handleUser()
-    }, [])
-    console.log("useruseruser",user)
-
+    
     const followstate = useSelector((state: RootState) => state.follow.followState)
     const folows = useSelector((state: RootState) => state.follow.follows)
+    const [followrandom, setFollowRandom] = useState<IFollow[] | undefined>(undefined);
+
+
+    const followss = async () => {
+        try {
+            SetAuthToken(localStorage.token);
+            const response = await ApiData.get(`/followes`);
+            setFollowRandom(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+    }
+    useEffect(() => {
+        followss()
+    }, [])
+
     const getFollowing = useCallback(async () => {
         try {
             const response = await ApiData.get(`/follow?type=${followstate}`)
@@ -35,10 +38,11 @@ const Followers = () => {
         } catch (error) {
             console.log(error)
         }
-    }, [followstate]);
+    }, [dispatch,followstate]);
+
     useEffect(() => {
         getFollowing()
-    }, [getFollowing])
+    }, [getFollowing,followstate])
 
 
     const handleFollower = async (id: number, followeduserId: number, isFollowed: boolean) => {
@@ -59,9 +63,9 @@ const Followers = () => {
 
         }
     }
-    // console.log(handleFollower)
-    console.log("followingsfollowingsfollowingsfollowingsfollowingsfollowings", folows)
-    console.log("followstate followstate :", followstate)
+    console.log("folows", folows)
+    console.log("followstate  :", followstate)
+    console.log("followrandom followrandom :", followrandom)
 
     return (
         <Container maxW='container.2xl' display={'flex'} justifyContent={'center'} >
@@ -78,15 +82,15 @@ const Followers = () => {
                                     Followers</Tab>
                                 <Tab onClick={() => dispatch(SETFOLLOW_STATE("followings"))}>
                                     Followings
-                                </Tab>
-                                <Tab >
+                                </Tab >
+                                <Tab onClick={() => dispatch(SETFOLLOW_STATE("followers") ? dispatch(SETFOLLOW_STATE("followings")) : dispatch(SETFOLLOW_STATE("followers"))) }>
                                     Mungkin anda suka?
                                 </Tab>
                             </TabList>
 
                             <TabPanels>
                                 <TabPanel>
-                                    {folows && folows.map((foll, i) =>
+                                    {/* {folows && folows.map((foll, i) =>
                                         <Box display={'flex'} justifyContent={'space-between'} marginTop={"20px"} key={i}>
                                             <Box display={'flex'} padding={"10px"}>
                                                 <Avatar
@@ -108,18 +112,19 @@ const Followers = () => {
                                                 <Button fontSize={'10px'} border={'2px'} borderColor={'gray.400'} height={'25px'} color={'dark'} onClick={() => handleFollower(foll.id, foll.user_id, foll.is_followed)} borderRadius={'20px'} py={'3px'} background={'back'} > {foll.is_followed ? 'Unfollow' : 'Follow'}</Button>
                                             </Box>
                                         </Box>
-                                    )}
+                                    )} */}
+                                    <FollowersTab/>
 
                                 </TabPanel>
 
                                 <TabPanel>
                                     {folows && folows.map((foll, i) =>
-                                        <Box display={'flex'} justifyContent={'space-between'} marginTop={"20px"} key={i} >
+                                        <Box display={'flex'} justifyContent={'space-between'} marginTop={"20px"} key={i}>
                                             <Box display={'flex'} padding={"10px"}>
                                                 <Avatar
                                                     width={'40px'}
                                                     height={'40px'}
-                                                    src="#"
+                                                    src={`${foll.profile_picture}`}
                                                     css={{
                                                         border: '2px solid white',
                                                     }}
@@ -140,17 +145,18 @@ const Followers = () => {
                                 <TabPanel>
                                     {/* {folows && folows.map((foll, i) => */}
                                         {/* <Box key={i}> */}
-                                            {user && user.map((usr, i) =>
+                                            {followrandom && followrandom.map((usr, i) =>
                                                 <Box display={'flex'} justifyContent={'space-between'} marginTop={"20px"} key={i}>
                                                     <Box display={'flex'} padding={"10px"}>
                                                         <Avatar
                                                             width={'40px'}
                                                             height={'40px'}
-                                                            src="#"
+                                                            src={`${usr.profile_picture}`}
                                                             css={{
                                                                 border: '2px solid white',
                                                             }}
                                                             name={usr.name}
+                                                            
                                                         />
                                                         <Box marginX={'10px'}>
                                                             <Text fontSize={'15px'}>{usr.name}</Text>
@@ -160,8 +166,7 @@ const Followers = () => {
                                                     </Box>
                                                     {/* {folows && folows.map((foll, i) => */}
                                                     <Box marginRight={'5px'} marginTop={"15px"} key={i}>
-                                                        {/* <Button fontSize={'10px'} border={'2px'} borderColor={'gray.400'} height={'25px'} color={'dark'} onClick={() => handleFollower(foll.id, foll.user_id, foll.is_followed)} borderRadius={'20px'} py={'3px'} background={'back'} > {foll.is_followed ? 'Unfollow' : 'Follow'}</Button> */}
-                                                        <Button fontSize={'10px'} border={'2px'} borderColor={'gray.400'} height={'25px'} color={'dark'}  borderRadius={'20px'} py={'3px'} background={'back'} > Follow</Button>
+                                                        <Button fontSize={'10px'} border={'2px'} borderColor={'gray.400'} height={'25px'} color={'dark'} onClick={() => handleFollower(usr.id, usr.user_id, usr.is_followed)} borderRadius={'20px'} py={'3px'} background={'back'} >{usr.is_followed ? 'Unfollow' : 'Follow'}</Button>
                                                     </Box>
                                                     {/* )} */}
                                                 </Box>

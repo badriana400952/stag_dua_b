@@ -13,6 +13,8 @@ import QueueController from '../queque/QueueController'
 import QueControllers from '../controllers/QueControllers'
 import LikeController from '../controllers/LikeController'
 import FollowController from '../controllers/FollowController'
+import SearchController from '../controllers/SearchController'
+// import SearchController from '../controllers/SearchController'
 
 // Membuat instance router dari Express
 const router = express.Router()
@@ -55,12 +57,15 @@ router.post("/like", authenticate, LikeController.create) // Menambahkan like ke
 router.delete("/like/:thread_id", authenticate, LikeController.delete) // Menghapus like dari thread setelah melewati proses autentikasi
 
 
+
 // FOLOW
 router.get("/followes", authenticate, FollowController.findRandom);
 router.get("/follow", authenticate, FollowController.find) // Mendapatkan daftar follow setelah melewati proses autentikasi
 router.post("/follow", authenticate, FollowController.create) // Membuat follow baru setelah melewati proses autentikasi
 router.delete("/follow/:followed_user_id", authenticate, FollowController.delete) // Menghapus follow dari pengguna setelah melewati proses autentikasi
 
+
+router.get("/search", authenticate, SearchController.findAll)
 //      Kode di atas menggambarkan pengaturan rute untuk berbagai operasi dalam aplikasi.Setiap rute terkait dengan pengelolaan thread, otorisasi pengguna, pengguna, balasan, dan likes.Berikut penjelasan untuk setiap bagian:
 //      Rute untuk halaman awal memberikan respons "hello world" ketika rute ini diakses.
 //      Diawali dengan mengimpor modul dan pengontrol yang diperlukan serta menginstansiasi router dari Express.

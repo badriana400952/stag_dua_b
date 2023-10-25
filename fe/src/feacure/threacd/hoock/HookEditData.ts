@@ -1,7 +1,7 @@
 
 import { ChangeEvent, useState } from 'react';
 import { ApiData, } from '../../../lib/Api';
-import { User } from '../../../interface/Thread';
+import {  User } from '../../../interface/Thread';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/types/rootState';
@@ -29,28 +29,14 @@ export const HookEditData = () => {
 
 
 
-    // const [profile, setProfile] = useState<User>(); // Tipe data profile diubah menjadi User | null
 
-    // const profilData = async () => {
-    //     try {
-    //         SetAuthToken(localStorage.token);
-    //         const response = await ApiData.get(`/user/${id}`);
-    //         setProfile(response.data);
-    //         // console.log("Berhasil mendapatkan profil:", response);
-    //       } catch (error) {
-    //         console.log(error);
-    //       }
-    // }
-    // useEffect(() => {
-    //     profilData()
-    // }, [])
 
     
     
     const dispatch = useDispatch()
     const profile = useSelector((state: RootState) => state.auth)
     
-    console.log('profile', profile)
+    // console.log('profile', profile)
 
     const [forms, setForms] = useState<User>({
         name: "",

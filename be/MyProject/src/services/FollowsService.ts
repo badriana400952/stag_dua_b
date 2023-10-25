@@ -97,7 +97,7 @@ class FollowsService {
           },
         },
       });
-      console.log("isFollowExistisFollowExistisFollowExistisFollowExist",isFollowExist)
+      console.log("isFollowExist",isFollowExist)
 
 
       if (isFollowExist > 0) {
@@ -139,32 +139,143 @@ class FollowsService {
     }
 }
 
+// async findRandom(reqQuery?: any,  loginSession: any): Promise<any> {
+//         try {
+//             let follows = Follow
+//             const limit = parseInt(reqQuery.limit ?? 0)
+//             const users = await this.userRepository
+//           .createQueryBuilder('users')
+//           .select()
+//           .orderBy('RANDOM()')
+//           .take(limit)
+//           .getMany();
+ 
+//          
+
+
+
+
+
+ 
+//           return users?.map((follow) => ({
+//             id: follow.id,
+//             user_id: follow.id,
+//             username: follow.username,
+//             name: follow.name,
+//             email: follow.email,
+//             profile_picture: follow.profile_picture,
+//             profile_deskripsi: follow.profile_deskripsi,
+//                 is_followed: true
+//           }))
+          
+//         } catch (error) {
+//          throw new Error(error.message)
+//         }
+//      }
+
+
 async findRandom(reqQuery?: any): Promise<any> {
-        try {
-            let follows = Follow
-         const limit = parseInt(reqQuery.limit ?? 0)
-          const users = await this.userRepository
-          .createQueryBuilder('users')
-          .select()
-          .orderBy('RANDOM()')
-          .take(limit)
-          .getMany();
- 
- 
-          return users?.map((follow) => ({
-            id: follow.id,
-            user_id: follow.id,
-            username: follow.username,
-            name: follow.name,
-            email: follow.email,
-            profile_picture: follow.profile_picture,
-            profile_deskripsi: follow.profile_deskripsi,
-                is_followed: true
-          }))
-        } catch (error) {
-         throw new Error(error.message)
-        }
-     }
+  try {
+    let follows = Follow;
+    const limit = parseInt(reqQuery.limit ?? 0);
+    const users = await this.userRepository
+      .createQueryBuilder("users")
+      .select()
+      .orderBy("RANDOM()")
+      .take(limit)
+      .getMany();
+
+      return users.map((user) => ({
+        id: user.id,
+        user_id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        profile_picture: user.profile_picture,
+        profile_deskripsi: user.profile_deskripsi,
+        is_followed: false//user.id === reqQuery.followed_user_id,
+    }));
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+
+// async findRandom(reqQuery: any, loginSession: any): Promise<any> {
+//   try {
+//     const limit = parseInt(reqQuery.limit ?? 0);
+    
+//     // Mengambil pengguna secara acak
+//     const users = await this.userRepository
+//       .createQueryBuilder('users')
+//       .select()
+//       .orderBy('RANDOM()')
+//       .take(limit)
+//       .getMany();
+
+//     // Memeriksa apakah pengguna yang akan diikuti sudah diikuti atau tidak
+//     const isFollowExist = await this.followRepository.count({
+//       where: {
+//         follower: {
+//           id: loginSession.user.id,
+//         },
+//         followed: {
+//           id: reqQuery.followed_user_id,
+//         },
+//       },
+//     });
+
+//     if (isFollowExist > 0) {
+//       throw new Error("You already follow this user!");
+//     }
+
+//     if (reqQuery.followed_user_id === loginSession.user.id) {
+//       throw new Error("You can't follow yourself!");
+//     }
+
+//     // Memeriksa apakah pengguna yang akan diikuti ada atau tidak
+//     const followedUser = await this.userRepository.findOne({
+//       where: {
+//         id: reqQuery.followed_user_id,
+//       },
+//     });
+
+//     if (!followedUser) {
+//       throw new Error("This user doesn't exist!");
+//     }
+
+//     // Membuat entitas Follow baru dan menyimpannya
+//     const follow = this.followRepository.create({
+//       follower: {
+//         id: loginSession.user.id,
+//       },
+//       followed: {
+//         id: reqQuery.followed_user_id,
+//       },
+//     });
+
+//     // Simpan entitas Follow ke dalam database
+//     await this.followRepository.save(follow);
+
+//     // Mengembalikan pengguna yang telah diikuti
+//     return users.map((user) => ({
+//       id: user.id,
+//       user_id: user.id,
+//       username: user.username,
+//       name: user.name,
+//       email: user.email,
+//       profile_picture: user.profile_picture,
+//       profile_deskripsi: user.profile_deskripsi,
+//       is_followed: user.id === reqQuery.followed_user_id,
+//     }));
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// }
+
+
+
+
   async delete(followedUserId: number, loginSession: any): Promise<any> {
     try {
       const follow = await this.followRepository.findOne({

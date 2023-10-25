@@ -1,91 +1,102 @@
-// import { useState } from 'react';
-// import { Box, Container } from "@chakra-ui/react"
-// import { Input } from '@chakra-ui/react'
-// import { ApiData } from '../lib/Api';
-// import LayouteRight from './LayoutRight';
-// import Layoute from './Layoute';
-// // import { FaSearch } from "react-icons/fa";
+import { FormEvent, useState } from 'react'
+import Layoute from './Layoute'
+import LayouteRight from './LayoutRight'
+import { Avatar, Box, Button, Container, FormControl, Input, Text, } from '@chakra-ui/react'
+import { ApiData } from '../lib/Api'
+import { SET_FOLLOWERS } from '../store/rootReduc'
+import { useDispatch } from 'react-redux'
+import { IFollow } from '../interface/Thread'
+import { BiSearch } from "react-icons/bi";
 
-
-// const Search = () => {
-//     const [search, setSearch] = useState('');
-//     const [searchResult, setSearchResult] = useState([]);
-//     const handleSearch = async (query) => {
-//         try {
-//             const response = await ApiData.get(`/thread=${query}`);
-//             setSearchResult(response.data);
-//             console.log(response.data);
-//         } catch (error) {
-//             console.error("Error fetching search results:", error);
-//         }
-//     };
-//     const handleSearchthread = (e: React.ChangeEvent<HTMLInputElement>) => {
-//         e.preventDefault()
-//         const searching = e.target.value
-//         setSearch(searching)
-//         handleSearch(searching)
-//         console.log(search)
-//     }
-//     console.log("searchResultsearchResult", searchResult)
-//     return (
-//         <>
-//             <Container maxW='container.2xl' display={'flex'} justifyContent={'center'} >
-//                 <Box display={'flex'} width={"1500px"} justifyContent={'space-between'} position={"relative"}>
-//                     <Box color={'black'} flex={'0,5'} position={"fixed"} >
-//                         <Layoute />
-
-//                     </Box>
-//                     <Box position={"relative"} left={'300px'} display={'flex'} width={"80%"}>
-//                         <Box color={'black'} flex={'1'} position={"relative"}>
-//                             <Box>
-//                                 <Input placeholder='Search' value={search} type='text' name="search" onChange={handleSearchthread} />
-//                             </Box>
-
-//                             <Box>
-//                                 <ul>
-//                                     {searchResult.map((result, index) => (
-//                                         <li key={index}>{result.content}</li>
-//                                     ))}
-//                                 </ul>
-//                             </Box>
-//                         </Box>
-//                         <Box flex={'0.5'} position={"relative"}>
-//                             <LayouteRight />
-//                         </Box>
-//                     </Box>
-//                 </Box>
-
-
-//             </Container>
-
-
-
-
-//             {/* <Container>
-//                 <Box>
-//                     <Input placeholder='Search' value={search} type='text' name="search" onChange={handleSearchthread} />
-//                 </Box>
-//                 <Box>
-//                     <ul>
-//                     {searchResult.map((result, index) => (
-//                         <li key={index}>{result.title}</li>
-//                     ))}
-//                 </ul>
-//                 </Box>
-
-//             </Container> */}
-//         </>
-
-//     )
-// }
-
-// export default Search
-
-import React from 'react'
 
 const Search = () => {
+  const [search, setSearch] = useState("")
+  const [searchResult, setSearchResult] = useState<IFollow[]>([])
+  const dispatch = useDispatch()
+
+
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const datash = await ApiData.get(`/search?q=${search}`)
+    setSearchResult(datash.data)
+    console.log(datash.data)
+  }
+
+  const handleFollower = async (id: number, followeduserId: number, isFollowed: boolean) => {
+    try {
+      if (!isFollowed) {
+        const response = await ApiData.post(`/follow`, {
+          followed_user_id: followeduserId
+        })
+        dispatch(SET_FOLLOWERS({ id: id, isFollowed: isFollowed }))
+        console.log("berhasil follow!", response.data);
+      } else {
+        const response = await ApiData.delete(`/follow/${followeduserId}`);
+        dispatch(SET_FOLLOWERS({ id: id, isFollowed: isFollowed }));
+        console.log("berhasil unfollow!", response.data);
+      }
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
+
   return (
-    <div>Search</div>
+    <Container maxW='container.2xl' display={'flex'} justifyContent={'center'} >
+      <Box display={'flex'} width={"1500px"} justifyContent={'space-between'}  >
+        <Box color={'black'} flex={'0,5'}  >
+          <Layoute />
+        </Box>
+        <Box>
+
+          <Box width={'80%'}   mt={10}>
+            <form onSubmit={handleSearch}>
+              <Box display={'flex'} gap={10}>
+                <FormControl >
+                  <Input type='text'padding={5} borderRadius={'10px'} width={'600px'} name='search' onChange={(e) => setSearch(e.target.value)} placeholder='search' />
+                </FormControl>
+
+                <FormControl >
+                  <Button type='submit'marginLeft={'10px'}> <BiSearch/></Button>
+                </FormControl>
+              </Box>
+            </form>
+
+
+          </Box>
+          <Box>
+            {searchResult.map((foll) => (
+              <Box display={'flex'} justifyContent={'space-between'} marginTop={"20px"} key={foll.id}>
+                <Box display={'flex'} padding={"10px"}>
+                  <Avatar
+                    width={'40px'}
+                    height={'40px'}
+                    src={`${foll.profile_picture}`}
+                    css={{
+                      border: '2px solid white',
+                    }}
+                    name={foll.name}
+                  />
+                  <Box marginX={'10px'}>
+                    <Text fontSize={'15px'}>{foll.name}</Text>
+                    <Text fontSize={'12px'} color={'gray.500'}>@{foll.username}</Text>
+                  </Box>
+
+                </Box>
+                <Box marginRight={'5px'} marginTop={"15px"}>
+                  <Button fontSize={'10px'} border={'2px'} borderColor={'gray.400'} height={'25px'} color={'dark'} onClick={() => handleFollower(foll.id, foll.user_id, foll.is_followed)} borderRadius={'20px'} py={'3px'} background={'back'} > {foll.is_followed ? 'Unfollow' : 'Follow'}</Button>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+
+        </Box>
+        <Box flex={'0.5'}>
+          <LayouteRight />
+        </Box>
+      </Box>
+
+    </Container>
   )
 }
 
