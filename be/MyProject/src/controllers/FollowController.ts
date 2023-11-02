@@ -79,4 +79,4 @@ class FollowController {
         }
     }
 }
-export default new FollowController();
+export default new FollowController;

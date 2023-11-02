@@ -206,7 +206,7 @@ class ThreadService {
             }
             console.log("INI ABGIAN AUTH IMAGE", data.image)
 
-            const thread = this.threadRepository.create({
+            const thread =  this.threadRepository.create({
                 image: clodResponse.secure_url,
                 content: data.content,
                 user: {
@@ -215,7 +215,7 @@ class ThreadService {
 
             })
 
-            const createdThread = this.threadRepository.save(thread)
+            const createdThread = await this.threadRepository.save(thread)
             return res.status(200).json({ massage: "data berhasil ditambahkan", thread });
         } catch (error) {
             return res.status(500).json(error);

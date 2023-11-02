@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 // Rute terkait threads
 router.get("/thread", authenticate, ThreadsController.find) // Mendapatkan daftar threads setelah melewati proses autentikasi
 router.get("/thread/:id", authenticate, ThreadsController.findOne) // Mendapatkan thread berdasarkan ID setelah melewati proses autentikasi
-router.post("/thread/created", authenticate, upload("image"), ThreadsQueue.create) // Membuat thread baru dengan mengunggah gambar (dengan antrean) setelah melewati proses autentikasi
+router.post("/thread/created", authenticate, upload("image"), ThreadsController.create) // Membuat thread baru dengan mengunggah gambar (dengan antrean) setelah melewati proses autentikasi
 router.delete("/thread/delete/:id", authenticate, ThreadsController.delete) // Menghapus thread berdasarkan ID setelah melewati proses autentikasi
 router.patch("/thread/update/:id", authenticate, ThreadsController.update) // Memperbarui informasi thread berdasarkan ID setelah melewati proses autentikasi
 

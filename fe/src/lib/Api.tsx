@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const ApiData = axios.create({
-    baseURL: "http://localhost:8000/api",
+    baseURL: "https://stag-dua-b.vercel.app/api",
 }) 
 export const SetAuthToken = (token: string) => {
     if(token) {
