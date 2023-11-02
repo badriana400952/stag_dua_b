@@ -45,6 +45,7 @@ export const authSlice = createSlice({
                 email: us.email,
                 profile_picture: us.profile_picture,
                 profile_deskripsi: us.profile_deskripsi,
+                
             }
 
             return user

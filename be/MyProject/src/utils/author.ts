@@ -1,4 +1,5 @@
-import * as Joi from "joi"
+// import * as Joi from "joi"
+import Joi = require("joi")
 
 export const registerSchema = Joi.object().keys({
     name: Joi.string().required(),

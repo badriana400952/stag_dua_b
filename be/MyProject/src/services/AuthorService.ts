@@ -3,8 +3,10 @@ import { AppDataSource } from "../data-source";
 import { Request, Response } from "express";
 import { User } from "../entities/User";
 import {  loginSchema, registerSchema } from "../utils/author";
-import * as jwt from "jsonwebtoken"
-import * as bcrypt from "bcrypt"
+// import * as jwt from "jsonwebtoken"
+import jwt = require("jsonwebtoken")
+import bcrypt = require("bcrypt")
+// import * as bcrypt from "bcrypt"
 class AuthorService {
 
     private readonly authRepository: Repository<User> = AppDataSource.getRepository(User)

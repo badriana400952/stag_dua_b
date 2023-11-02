@@ -1,5 +1,6 @@
 
-import * as express from 'express'
+// import * as express from 'express'
+import express = require("express")
 import ThreadsController from '../controllers/ThreadsController'
 import { Request, Response } from 'express'
 import AuthorController from '../controllers/AuthorController'

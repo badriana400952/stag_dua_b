@@ -1,5 +1,6 @@
 // import { EventEmitter } from "stream"
-import * as amqp from "amqplib"
+// import * as amqp from "amqplib"
+import amqp = require("amqplib")
 // import {v2 as cloudinary } from "cloudinary"
 import "dotenv/config"
 import { AppDataSource } from "../data-source"

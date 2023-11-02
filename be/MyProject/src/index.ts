@@ -1,8 +1,9 @@
 import { AppDataSource } from "./data-source"
 // import { User } from "./entities/User"
 import router from "./route"
-import * as express from 'express'
-import * as dotenv from 'dotenv'
+// import * as express from 'express'
+import express = require('express')
+// import * as dotenv from 'dotenv'
 import 'dotenv/config'
 // import { Request, Response } from 'express'
 var cors = require('cors')

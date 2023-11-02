@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import * as amqp from "amqplib";
+// import * as amqp from "amqplib";
+import amqp = require("amqplib")
 import { createdThreadSchema } from "../utils/threads";
 class QueueController {
     async queue(req: Request, res: Response) {

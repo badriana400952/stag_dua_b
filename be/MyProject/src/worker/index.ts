@@ -1,6 +1,7 @@
 import cloudinaryConfig from "../config/config";
 import { AppDataSource } from "../data-source";
-import * as amqp from "amqplib";
+// import * as amqp from "amqplib";
+import amqp = require("amqplib")
 import "dotenv/config"
 import ThreadWorker from "./ThreadWorker";
 
